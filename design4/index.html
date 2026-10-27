@@ -1,0 +1,47 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>4 · Immersive Tool Workspace</title><link rel="stylesheet" href="../shared/common.css">
+<style>:root{--acc:#f0883e;--bg:#0e1013;--bg2:#16191e;--bg3:#20242b;--font:"Inter",system-ui,sans-serif}body{overflow:hidden}
+.ws{display:grid;grid-template-columns:52px 230px 1fr 280px;grid-template-rows:42px 1fr auto;height:100vh}
+.ws.noex{grid-template-columns:52px 0 1fr 280px}.ws.noin{grid-template-columns:52px 230px 1fr 0}.ws.noex.noin{grid-template-columns:52px 0 1fr 0}
+.mb{grid-column:1/-1;display:flex;align-items:center;gap:2px;padding:0 8px;background:var(--bg2);border-bottom:1px solid var(--line)}
+.mb>button{background:none;border:0;color:var(--fg);font:13px var(--font);padding:6px 10px;border-radius:6px;cursor:pointer}.mb>button:hover{background:var(--bg3)}
+.act{background:var(--bg2);border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding-top:6px;gap:2px;overflow:auto}
+.act button{width:40px;height:40px;background:none;border:0;border-radius:8px;font-size:18px;cursor:pointer;color:var(--fg)}.act button.on{background:var(--bg3);box-shadow:inset 3px 0 var(--acc)}
+.ex,.in{background:var(--bg2);overflow:auto;padding:10px;font-size:13px}.ex{border-right:1px solid var(--line)}.in{border-left:1px solid var(--line)}
+.ex .f{padding:5px 8px;border-radius:6px;cursor:pointer}.ex .f:hover{background:var(--bg3)}
+.center{display:flex;flex-direction:column;min-width:0;overflow:hidden}.tabs4{display:flex;background:var(--bg2);border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs4 div{padding:8px 12px;border-right:1px solid var(--line);font-size:13px;cursor:pointer;white-space:nowrap;color:var(--mut)}.tabs4 div.on{background:var(--bg);color:var(--fg);box-shadow:inset 0 2px var(--acc)}.tabs4 i{margin-left:8px;font-style:normal;opacity:.6}
+#main{overflow:auto;padding:14px;flex:1}
+.con{grid-column:2/-1;background:var(--bg2);border-top:1px solid var(--line);height:210px;overflow:auto;padding:8px 12px}.con.min{height:30px;overflow:hidden}
+.status{position:fixed;bottom:0;right:0;font-size:11px;padding:2px 10px;background:var(--acc);color:#000}
+#main .card{overflow-x:auto}@media(max-width:800px){.mb b{white-space:nowrap;font-size:13px}.status{display:none}.con{height:170px}.mb>button{padding:6px 7px}.ws,.ws.noex,.ws.noin{grid-template-columns:44px 1fr}.ex,.in{display:none}.ws.mex .ex{display:block;position:fixed;left:44px;top:42px;bottom:0;width:240px;z-index:50}.ws.min .in{display:block;position:fixed;right:0;top:42px;bottom:0;width:270px;z-index:50}.con{grid-column:2}.mb .hide{display:none}.act button{width:36px}}</style></head><body>
+<div class="ws" id="ws">
+<div class="mb"><b style="margin-right:8px">⚗️ ChemBench</b><button onclick="popMenu(this,[{t:'New research entry',fn:function(){go('archive')}},{t:'Import structure…',fn:function(){go('lab')}},{t:'Export .mol',fn:function(){modal('Export',molPanel('ethanol',200))}}])">File</button><button onclick="popMenu(this,[{t:'Toggle Explorer',fn:function(){tg('noex','mex')}},{t:'Toggle Inspector',fn:function(){tg('noin','min')}},{t:'Toggle Tutor console',fn:function(){$('.con').classList.toggle('min')}},{t:'Dark / light',fn:toggleTheme}])">View</button><button onclick="popMenu(this,[{t:'Oxidation (reflux)',fn:function(){go('lab')}},{t:'Combustion of ethanol',fn:function(){toast('C₂H₅OH + 3O₂ → 2CO₂ + 3H₂O')}},{t:'Fermentation',fn:function(){toast('C₆H₁₂O₆ → 2C₂H₅OH + 2CO₂')}}])">Simulate</button><button class="hide" onclick="go('plugins')">Plugins</button><span class="sp"></span><button onclick="tg('noex','mex')">☰</button><button onclick="tg('noin','min')">ⓘ</button><button class="hide" onclick="palette()" title="Command palette (Ctrl+K)">⌘K</button><button onclick="toggleTheme()">🌓</button></div>
+<div class="act" id="act"></div>
+<div class="ex"><div class="mut sm">EXPLORER</div><div id="exp"></div></div>
+<div class="center"><div class="tabs4" id="tabs"></div><div id="main"></div></div>
+<div class="in" id="insp"></div>
+<div class="con" id="con"><div class="row"><b class="sm sp">TUTOR CONSOLE</b><button class="btn ghost sm" onclick="this.closest('.con').classList.toggle('min')">▾</button></div><div data-chat></div></div>
+</div><div class="status">● Plugins: MolViewer 3D · ChemFormats · ReactionSim &nbsp; | &nbsp; Load: moderate</div>
+<script>var START="lab"</script><script src="../shared/data.js"></script><script src="../shared/nav.js"></script><script>
+function tg(c,m){var w=$('#ws');if(innerWidth<=800)w.classList.toggle(m);else w.classList.toggle(c)}
+$('#act').innerHTML=NAV.map(function(t){return '<button title="'+t[1]+'" data-n="'+t[0]+'">'+t[2]+'</button>'}).join('');
+$$('#act button').forEach(function(b){b.onclick=function(){go(b.dataset.n)}});
+$('#exp').innerHTML='<p class="sm"><b>▾ Molecules</b></p>'+Object.keys(MOLS).map(function(k){return '<div class="f" data-m="'+k+'">🧪 '+k+'.mol</div>'}).join('')+'<p class="sm"><b>▾ Teacher materials</b></p><div class="f" data-s>📄 worksheet_6.2.docx</div><div class="f" data-s>📄 unit6_slides.pdf</div><p class="sm"><b>▾ Research</b></p>'+ARCH.slice(0,4).map(function(a,i){return '<div class="f" data-a="'+i+'">📓 '+a.t.slice(0,26)+'…</div>'}).join('');
+$$('[data-m]').forEach(function(f){f.onclick=function(){go('lab');setTimeout(function(){var c=$('#main canvas');c._v.set(f.dataset.m);$('#main select').value=f.dataset.m},50)}});
+$$('[data-s]').forEach(function(f){f.onclick=function(){go('school')}});$$('[data-a]').forEach(function(f){f.onclick=function(){drawer(ARCH[f.dataset.a].t,archDetail(+f.dataset.a))}});
+var OPEN=['lab'];
+function insp(){var c=CMAP.ox;$('#insp').innerHTML='<div class="mut sm">INSPECTOR</div><h3>Focus: '+c.n+'</h3><div class="bar"><i style="width:'+c.m*100+'%"></i></div><p class="sm">'+mlabel(c.m)+' · '+Math.round(c.m*100)+'%</p><div class="tabs" data-tabs><button class="on" data-t="a">Mastery</button><button data-t="b">School</button></div><div class="tabpane on" data-pane="a">'+CONCEPTS.filter(function(x){return x.z==='Organic'||x.z==='Reactions'}).map(function(x){return '<div class="sw sm" style="cursor:pointer" onclick="conceptDrawer(\''+x.id+'\')"><span>'+x.n+'</span><b style="color:'+mcol(x.m)+'">'+Math.round(x.m*100)+'</b></div>'}).join('')+'</div><div class="tabpane" data-pane="b"><p class="sm">Mrs. Alvarez · Unit 6</p><p class="sm"><span class="pill g">2 wks ahead</span></p><p class="sm">Quiz 6.2 Fri — predicted 91%</p></div><p class="sm mut" style="margin-top:12px">Cognitive load: moderate → hints available, scaffolds fading.</p>';wire($('#insp'))}
+insp();wire($('#con'));
+window.render=function(n){if(OPEN.indexOf(n)<0)OPEN.push(n);$$('#act button').forEach(function(b){b.classList.toggle('on',b.dataset.n===n)});
+ $('#tabs').innerHTML=OPEN.map(function(o){var t=title(o);return '<div data-o="'+o+'" class="'+(o===n?'on':'')+'">'+t[2]+' '+t[1]+(OPEN.length>1?'<i data-x="'+o+'">✕</i>':'')+'</div>'}).join('');
+ $$('#tabs [data-o]').forEach(function(d){d.onclick=function(e){if(e.target.dataset.x){OPEN.splice(OPEN.indexOf(e.target.dataset.x),1);go(OPEN[OPEN.length-1]);return}go(d.dataset.o)}});
+ $('#main').innerHTML=SCREENS[n]();wire($('#main'));$('#ws').classList.remove('mex','min')};
+
+var CTX={lab:'Molecule 3D: drag to rotate; explorer opens .mol files.',mech:'Step the mechanism; inspector tracks arrow-pushing mastery.',titr:'Equivalence near 25 mL; watch the indicator.',spec:'Broad O–H at 3300 cm⁻¹ is the alcohol signature.',credmap:'Credentials are W3C VCs; share selectively.',school:'Class overlay: Mrs. Alvarez · Unit 6.',map:'Nodes glow brighter as mastery rises; forgetting dims them.'};
+var _r=window.render;window.render=function(n){_r(n);var t=title(n);var c=$('#ctx');if(!c){c=h('<div id="ctx" class="sm" style="margin-top:10px;padding:8px;border:1px solid var(--line);border-radius:8px"></div>');$('#insp').prepend(c)}c.innerHTML='<b>'+t[2]+' '+t[1]+'</b><br><span class="mut">'+(CTX[n]||'Tool open in workspace. Tabs persist; close with ✕.')+'</span>'};
+function palette(){var m=modal('Command palette','<input class="inp" id="pq" placeholder="Jump to a tool…" style="width:100%"><div id="pl" style="max-height:50vh;overflow:auto;margin-top:8px"></div>');var q=$('#pq',m),l=$('#pl',m);
+ function f(){l.innerHTML='';NAV.filter(function(x){return x[1].toLowerCase().indexOf(q.value.toLowerCase())>=0}).forEach(function(x){var b=h('<button class="btn ghost" style="display:block;width:100%;text-align:left">'+x[2]+' '+x[1]+'</button>');b.onclick=function(){m.remove();go(x[0])};l.appendChild(b)})}
+ q.oninput=f;f();q.focus()}
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();palette()}});
+if(innerWidth<=800)$('.con').classList.add('min');
+</script></body></html>

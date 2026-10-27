@@ -1,0 +1,38 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>5 · Timeline & Portfolio Hybrid</title><link rel="stylesheet" href="../shared/common.css">
+<style>:root{--acc:#c49a6c;--acc2:#7fb69a;--bg:#12110f;--bg2:#1b1a17;--bg3:#25231f;--line:#34312b;--fg:#ece6dc;--mut:#a49b8c;--r:16px;--font:"Iowan Old Style","Palatino Linotype",Georgia,serif}
+body.light{--bg:#f7f3ec;--bg2:#fffdf8;--bg3:#efe8dc;--line:#ddd3c3;--fg:#2a2620;--mut:#7a6f60}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;gap:10px;padding:12px 20px}.brand{font-size:1.15em;letter-spacing:.04em}.brand i{color:var(--acc);font-style:normal}
+.ribbon{position:relative;display:flex;overflow-x:auto;padding:4px 20px 14px;gap:0;scrollbar-width:none}
+.ribbon::before{content:"";position:absolute;left:20px;right:20px;top:15px;height:2px;background:linear-gradient(90deg,var(--acc2),var(--acc) 55%,var(--line) 56%)}
+.stg{position:relative;flex:1;min-width:92px;text-align:center;background:none;border:0;color:var(--mut);font:12px var(--font);cursor:pointer;padding-top:20px}
+.stg::before{content:"";position:absolute;top:6px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--bg3);border:2px solid var(--line)}
+.stg.done::before{background:var(--acc2);border-color:var(--acc2)}.stg.now{color:var(--fg);font-weight:700}.stg.now::before{background:var(--acc);border-color:var(--acc);box-shadow:0 0 0 5px #c49a6c44}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:0 20px 10px;scrollbar-width:none}
+.chips button{flex:none;background:var(--bg2);border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:6px 12px;font:13px var(--font);cursor:pointer}
+.chips button.on{background:var(--acc);color:#1b1a17;border-color:var(--acc)}.chips .sep{flex:none;width:1px;background:var(--line);margin:0 4px}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 100px}.lay{display:grid;grid-template-columns:1fr 290px;gap:22px}
+.side .card{position:sticky;top:180px}.ttl{font-size:2em;font-weight:400;margin:0 0 4px}
+.ent{border-left:2px solid var(--line);padding:2px 0 12px 14px;position:relative;cursor:pointer}.ent::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--acc)}
+.ent:hover b{color:var(--acc)}.btn.pri{color:#1b1a17}
+@media(max-width:860px){.hl{display:none}.brand{white-space:nowrap}.hd .btn{white-space:nowrap}.lay{grid-template-columns:1fr}.side{display:none}.ttl{font-size:1.5em}main{padding:16px 14px 90px}.hd{padding:10px 14px}}
+.lay>div{min-width:0}#main svg{max-width:100%;height:auto}#main{overflow-x:auto}</style></head><body>
+<header><div class="hd"><span class="brand">◐ <i>Lifeline</i> Learning</span><span class="sp"></span><button class="btn ghost" onclick="go('portfolio')">🗂<span class="hl"> Portfolio</span></button><button class="btn ghost" onclick="toggleTheme()" title="Theme">🌓</button><button class="btn ghost" onclick="popMenu(this,[{t:'👤 Dustin B. · age 14 · Grade 9'},{t:'⬇ Export my data',fn:function(){toast('Export bundle (JSON-LD + VCs) prepared')}},{t:'⚙️ Settings',fn:function(){go('settings')}}])">DB ▾</button></div>
+<div class="ribbon" id="rib"></div><div class="chips" id="chips"></div></header>
+<main><div class="lay"><div><div class="mut sm" id="crumb"></div><h1 class="ttl" id="ttl"></h1><div id="main"></div></div>
+<div class="side"><div class="card"><h3>This chapter</h3><p class="mut sm">Age 14 · High-school chemistry, 2.1 grade levels ahead of typical pacing.</p><div id="recent"></div><button class="btn pri" style="width:100%;margin-top:8px" onclick="go('timeline')">Open full timeline</button></div></div></div></main>
+<script src="../shared/data.js"></script><script src="../shared/nav.js"></script><script>
+var STAGES=[['Early','5–7'],['Primary','8–10'],['Middle','11–13'],['High school','14–17'],['Undergrad','18–21'],['Graduate','22–25'],['PhD','26+']];
+$('#rib').innerHTML=STAGES.map(function(s,i){return '<button class="stg '+(i<3?'done':i==3?'now':'')+'" data-i="'+i+'">'+s[0]+'<br><span class="mut">'+s[1]+'</span></button>'}).join('');
+$$('.stg').forEach(function(b){b.onclick=function(){var i=+b.dataset.i,s=STAGES[i];modal(s[0]+' chapter · ages '+s[1],i<3?'<p>Archived chapter: '+(12+i*9)+' milestones, '+(40+i*30)+' artifacts.</p><p class="mut">Interface at this stage used '+(i==0?'big drag-and-drop tiles and voice':'guided cards and narrative worlds')+'.</p>':i==3?'<p>You are here. Chemistry mastery path, 2.1 levels ahead.</p>':'<p>Projected: reached around age '+(15+i*2)+' at current pace. Tools unlock: '+(i>4?'research scripting, literature RAG, notebooks':'lab notebooks, proofs')+'.</p>',[{t:'View on timeline',pri:1,fn:function(){go('timeline')}},{t:'Close'}])}});
+var GROUPS=[['home','portfolio','timeline','learn','map','skills','practice'],['plugins','lab','mech','ptable','titr','spec','draw'],['school','archive','credmap','credentials','readiness','settings']];
+$('#chips').innerHTML=GROUPS.map(function(g){return g.map(function(n){var t=title(n);return '<button data-n="'+n+'">'+t[2]+' '+t[1]+'</button>'}).join('')}).join('<span class="sep"></span>');
+$$('#chips button').forEach(function(b){b.onclick=function(){go(b.dataset.n)}});
+$('#recent').innerHTML=[['Ethanol oxidation mastered','mech'],['Titration lab report','titr'],['Open Badge: Organic I','credentials'],['IR spectrum annotated','spec']].map(function(r){return '<div class="ent" data-g="'+r[1]+'"><b>'+r[0]+'</b></div>'}).join('');
+$$('#recent .ent').forEach(function(e){e.onclick=function(){go(e.dataset.g)}});
+var CH={lab:1,mech:1,ptable:1,titr:1,spec:1,draw:1};
+window.render=function(n){var t=title(n);$('#ttl').textContent=t[1];$('#crumb').textContent=CH[n]?'Chemistry plugin pack · alcohols & ethanol':'Chapter 4 · High school · Oct 2026';
+ var el=$('#main');el.innerHTML=SCREENS[n]?SCREENS[n]():'<p>Coming soon</p>';wire(el);
+ $$('#chips button').forEach(function(b){b.classList.toggle('on',b.dataset.n===n)});var a=$('#chips button.on');a&&a.scrollIntoView({inline:'center',block:'nearest'});};
+var START='portfolio';
+</script></body></html>

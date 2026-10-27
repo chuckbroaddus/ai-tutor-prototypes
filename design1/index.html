@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1 · Spatial Knowledge Realm</title><link rel="stylesheet" href="../shared/common.css">
+<style>:root{--acc:#a371f7;--acc2:#3fb950;--bg:#0b0f1a;--bg2:#141a2b;--bg3:#1e2640}
+body{background:radial-gradient(ellipse at top,#1b1640,#0b0f1a 60%) fixed}body.light{background:#f3f0ff}
+header{display:flex;align-items:center;gap:10px;padding:10px 14px;position:sticky;top:0;z-index:20;background:#0b0f1acc;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}body.light header{background:#fffc}
+.avatar{width:38px;height:38px;border-radius:50%;background:conic-gradient(var(--acc) 64%,var(--bg3) 0);display:grid;place-items:center;font-weight:800}
+main{padding:14px;max-width:1200px;margin:auto;padding-bottom:100px}
+.dock{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;background:var(--bg2);border:1px solid var(--line);border-radius:22px;padding:6px;z-index:30;box-shadow:0 10px 30px #000a;max-width:96vw;overflow-x:auto}
+.dock button{background:none;border:0;color:var(--mut);font:inherit;font-size:12px;padding:6px 10px;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-width:58px}
+.dock button b{font-size:20px}.dock button.on{background:var(--bg3);color:var(--fg)}
+.quest{border-left:4px solid var(--acc)}</style></head><body>
+<header><div class="avatar" title="Level">14</div><div class="sp"><b>Dustin's Realm</b><div class="sm mut" id="crumb">Chemistry · Alcohol Forest</div></div>
+<button class="btn ghost" onclick="popMenu(this,[{t:'🌐 Switch realm: Physics'},{t:'📖 Switch realm: English'},{t:'🎨 Switch realm: Photography'},{t:'➕ Explore a new subject',fn:function(){go('plugins')}}])">Realms ▾</button>
+<button class="btn ghost" onclick="toggleTheme()">🌓</button><button class="btn ghost" onclick="drawer('Notifications','<p>🌱 Fermentation zone grew a new path</p><p>📅 Quiz 6.2 Friday — practice ready</p><p>🏅 Credential share viewed by STEM Academy</p>')">🔔</button></header>
+<main id="main"></main><nav class="dock" id="dock"></nav>
+<script src="../shared/data.js"></script><script src="../shared/nav.js"></script><script>
+var DOCK=NAV.map(function(t){return t[0]});
+$('#dock').innerHTML=DOCK.map(function(n){var t=title(n);return '<button data-n="'+n+'"><b>'+t[2]+'</b>'+t[1].split(' ')[0]+'</button>'}).join('');
+$$('#dock button').forEach(function(b){b.onclick=function(){go(b.dataset.n)}});
+window.render=function(n){var t=title(n);$$('#dock button').forEach(function(b){b.classList.toggle('on',b.dataset.n===n)});$('#crumb').textContent='Chemistry · '+t[1];
+ var top='';if(n==='home'){top='<div class="card quest"><div class="row"><div class="sp"><h2>🌲 Quest: Tame the Oxidation Rapids</h2><p class="mut">Master oxidation of alcohols to open the path to the Ester Gardens.</p><div class="bar"><i style="width:22%"></i></div></div><button class="btn pri" onclick="go(\'practice\')">Enter quest</button></div></div>'+SCREENS.map('realm')}
+ var body=n==='map'?SCREENS.map('realm'):SCREENS[n]();$('#main').innerHTML='<h1>'+t[2]+' '+t[1]+'</h1>'+top+body;wire($('#main'))};
+</script></body></html>
