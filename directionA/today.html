@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Today</title><link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="a.css"></head><body><script src="a.js"></script><script>var cards=LS.get('cards',{review:true,week:true});
+function today(){
+ var n=learnerName();
+ var html='';
+ if(!LS.get('movedSeen',false)) html+='<div class="callout" id="moved"><span>ℹ️</span><span class="sp"><b>Settings has its own window now.</b> Open it from the side bar, from the learner menu, or with Command-comma.</span><a class="btn sm" href="settings.html">Open Settings</a><button class="btn sm ghost" id="movedok">Got it</button></div>';
+ html+='<div class="row" style="margin-bottom:12px"><div class="sp"><h1 style="margin:0">Good morning, '+esc(n)+'</h1><span class="mut">One next step, then your review.</span></div><button class="btn" id="cust">Customize Today ▾</button></div>';
+ html+='<div class="card next"><span class="pill a">Next step</span><h2>Find your starting point</h2><p class="mut">Answer a few questions so your first lessons fit. It takes about 5 minutes and nothing is graded.</p><div class="row"><a class="btn pri" id="startpt" href="lesson.html">Start</a><button class="btn ghost" id="later">Not now</button></div></div>';
+ if(cards.review) html+='<div class="card" id="c-review"><div class="row"><b class="sp">Review</b><span class="pill">3 items</span></div><p class="mut">Short questions on things you learned recently, so they stay.</p><button class="btn" id="startrev">Start review</button></div>';
+ if(cards.week) html+='<div class="card" id="c-week"><div class="row"><b class="sp">This week</b><span class="pill g">+9% in chemistry</span></div><div class="bar" style="margin:8px 0"><i style="width:71%"></i></div><p class="mut sm">3 hours 40 minutes of practice. 41 items done.</p><button class="btn ghost" id="seegrowth">See your growth</button></div>';
+ shell('today','Today',html);
+ var m=$('#movedok');m&&(m.onclick=function(){LS.set('movedSeen',true);$('#moved').remove()});
+ $('#later').onclick=function(){toast('OK. The card stays here until you are ready.')};
+ var sr=$('#startrev');sr&&(sr.onclick=function(){toast('Review starts here. 3 short questions.')});
+ var sg=$('#seegrowth');sg&&(sg.onclick=function(){location.href='section.html?s=growth'});
+ $('#cust').onclick=function(){popMenu(this,[{t:(cards.review?'✓ ':'')+'Show review',fn:function(){cards.review=!cards.review;LS.set('cards',cards);today()}},{t:(cards.week?'✓ ':'')+'Show this week',fn:function(){cards.week=!cards.week;LS.set('cards',cards);today()}}])};
+}
+today();
+</script></body></html>

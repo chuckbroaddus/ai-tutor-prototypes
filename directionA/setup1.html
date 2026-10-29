@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Step 1 of 3: Welcome</title><link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="a.css"></head><body><div class="fr"><div class="frcard"><div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div><p class="mut sm" style="margin:0">Step 1 of 3</p><h1>Welcome to KelyraAdvance</h1><p class="mut">Here is how KelyraAdvance handles your family's information. You can read the full agreement any time.</p>
+<div class="sum"><span>🔒</span><div><b>Stays on this Mac</b>The learning record, your choices and the recovery key.</div></div>
+<div class="sum"><span>☁️</span><div><b>Leaves this Mac only if you turn it on</b>An encrypted backup, and safety alerts to a parent or guardian.</div></div>
+<div class="sum"><span>🤖</span><div><b>The AI tutor is off</b>Artificial intelligence (AI) is off until a parent or guardian turns it on. Lessons and practice work without it.</div></div>
+<div class="sum"><span>🛟</span><div><b>Safety alerts</b>Until a learner turns 18, an alert goes to a parent or guardian. It never includes the lesson text.</div></div>
+<p style="margin:14px 0 4px"><a href="#" id="agr">Read the full agreement</a></p>
+<fieldset style="border:0;padding:0;margin:10px 0 0"><legend style="font-weight:600">Can KelyraAdvance keep a learning record on this Mac? You cannot use the app without this.</legend>
+<label class="choice"><input type="radio" name="agree" value="yes"> I agree</label><label class="choice"><input type="radio" name="agree" value="no"> I do not agree</label></fieldset>
+<div class="err" id="err" role="alert"></div>
+<div class="acts"><span class="mut sm">You can change any of this later in Settings.</span><button class="btn pri" id="go">Continue</button></div></div></div><script src="a.js"></script><script>
+$("#agr").onclick=function(e){e.preventDefault();modal("The full agreement","<p>This is where the full agreement text appears. It covers what stays on this Mac, what leaves it only when you turn it on, safety alerts, and how to withdraw.</p><p class=\"mut sm\">The four short lines on the screen match this text.</p>",[{t:"Close",pri:1}])};
+$("#go").onclick=function(){var c=$("input[name=agree]:checked");if(!c){$("#err").textContent="Choose one to continue.";return}
+ location.href=c.value==="yes"?"setup2.html":"setup-declined.html"};
+$$("input[name=agree]").forEach(function(r){r.onchange=function(){$("#err").textContent=""}});</script></body></html>

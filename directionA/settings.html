@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Settings</title><link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="a.css"></head><body><script src="a.js"></script><script>
+var PANES=[['learner','Learner','🎓','Learner, or a parent or guardian where the rules lock a setting'],['family','Family and privacy','👪','Parent or guardian, behind the PIN'],['ai','AI tutor','🤖','Parent or guardian'],['backup','Backup and devices','💾','Parent or guardian'],['advanced','Advanced','🛠','Parent or guardian']];
+var STYLES={'Ages 5 to 8':'Big buttons, very few things on screen, and the tutor uses short, simple words.','Ages 9 to 12':'Clear steps, a few choices at a time, and the tutor explains in everyday words.','Ages 13 to 18':'Full screens with progress and tools. The tutor explains and asks you to try first.','College':'Dense, fast screens with sources. The tutor assumes you know the basics.','Graduate school':'Research tools up front. The tutor works like a study partner.'};
+/* row: [id,label,type,note,opts] ; group: [heading,[rows]] */
+var DATA={
+learner:[['Appearance',[['theme','Appearance','seg','Changes the colors across the app. Dark is the default.',['Dark|dark','Light|light','Follow my Mac|mac'],'dark']]],
+ ['Reading and access',[['text','Text size','range','Makes text smaller or larger everywhere in the app.',[80,140],100],
+  ['hc','High contrast','toggle','Makes text and borders stand out more.',null,false],
+  ['rm','Reduce motion','toggle','Turns off animations and moving effects.',null,false],
+  ['easy','Easier reading font','toggle','Uses a font that is easier to read for some people.',null,false],
+  ['caps','Captions','toggle','Shows words on screen for any sound in a lesson.',null,false],
+  ['xtime','Extended time','toggle','Gives more time on timed practice.',null,false]]],
+ ['Style and help',[['style','Interface style','style','Changes how busy the screens look and how the tutor talks. Lessons and progress stay the same.',Object.keys(STYLES),'Ages 13 to 18'],
+  ['badges','Badges and skill tree','toggle','Shows or hides badges and the skill tree. Progress is the same either way.',null,true],
+  ['aloud','Read aloud','toggle','Reads lesson text out loud.',null,false],
+  ['help','Help on graded work','locked','Sets how much the tutor can help on graded work. Only a parent or guardian can change this.','Guided help only'],
+  ['limits','Session limits','select','Sets how long a session can run and when the app suggests a break.',['No limit','45 minutes','90 minutes','2 hours'],'90 minutes']]]],
+family:[['Family members',[['members','Family members','button','Shows who can use this Mac and who can change settings.','Manage','members']]],
+ ['Choices your family has made',[['g1','Teacher materials','toggle','Lets the app read school files you add, such as a syllabus. Off until a family member uses it.',null,false],
+  ['g2','Voice','toggle','Lets the learner talk to the app. Off until someone uses it.',null,false],
+  ['g3','Sharing','toggle','Lets the learner share progress outside the app. Off until someone shares.',null,false],
+  ['g4','Readiness reports','toggle','Lets the app write a report on moving up a subject or grade.',null,false],
+  ['g5','Photos of graded tests','toggle','Lets the app read a photo of a returned test to find gaps.',null,false],
+  ['g6','Extra notifications','toggle','Lets the app send reminders beyond safety alerts.',null,false]]],
+ ['Safety',[['promise','Safety promise','button','Shows what the tutor will and will not do, in words a learner can read.','Read','promise'],
+  ['trusted','Trusted contact','button','At 18, safety alerts stop unless the learner picks a trusted contact. The alert never includes lesson text.','Choose','trusted']]],
+ ['Region',[['region','Region','select','Sets the age rules that apply for consent.',['Texas, United States','California, United States','Ontario, Canada','England, United Kingdom'],'Texas, United States']]],
+ ['Your data',[['think','What does the app think about me?','button','Shows what the app has worked out about the learner, such as skills and pace.','View','think'],
+  ['inbox','Family inbox','button','Opens safety alerts and weekly summaries.','Open','inbox'],
+  ['limits2','About your data and its limits','button','Explains what the app can and cannot know, and why a score is not a grade.','Read','limits'],
+  ['export','Save a copy of the records','button','Saves a copy of the records to a folder you choose. Nothing is deleted.','Save a copy','export'],
+  ['withdraw','Withdraw agreement and lock the app','danger','Takes back your agreement. The app locks until you agree again. Nothing is deleted.','Withdraw','withdraw'],
+  ['delete','Delete records','danger','Permanently removes records. This cannot be undone.','Delete','delete']]]],
+ai:[['AI tutor',[['aion','AI tutor','toggle','Turns the AI tutor on or off. It is off by default. Lessons and practice work without it.',null,false],
+  ['aisent','What is sent and to whom','button','Your question and the tutor\'s reply go to the AI company you choose. Lesson files and the learner\'s name are not sent.','See details','aisent'],
+  ['aico','AI company and how long it keeps data','button','Shows the company and how long it keeps your questions and replies.','Choose','aico']]]],
+backup:[['Backup',[['bk','Back up the family\'s records','toggle','Keeps an encrypted copy of the learning record so you can move to a new Mac.',null,false],
+  ['acct','Account email','button','Backup needs an account so we can send you a sign-in link.','Create an account','acct'],
+  ['rk','Recovery key','button','Opens a new copy of the key that unlocks the backup. Print it and keep the paper safe.','Print the key again','rk']]],
+ ['Devices',[['move','Move to a new Mac','button','Walks you through bringing the records to a new Mac. Nothing is deleted from this one.','Start','move'],
+  ['dev','Devices and sign-out','button','Shows each Mac signed in to this family and lets you sign one out.','Manage','dev']]]],
+advanced:[['Tools',[['tools','Subject tools','toggle','Turns extra tools, such as the molecule viewer, on or off.',null,true],
+  ['simp','Simplify the screen when the learner is overloaded','toggle','When on, the app shows fewer things at once if the learner seems overwhelmed.',null,false]]],
+ ['Security',[['seckey','Security key and extra sign-in check','toggle','Asks for a security key or a code after the PIN. Use it if others share this Mac.',null,false]]],
+ ['About',[['about','About KelyraAdvance','credits','Shows the version and the open-source tools we use.',null]]]]
+};
+var MODALS={
+members:['Family members','<ul class="rl"><li>👤 You <span class="chip">Parent or guardian</span></li><li>🎓 Dustin <span class="chip">Learner, age 15</span></li></ul>',[{t:'Add a family member',pri:1,fn:function(){toast('Adding a member starts here.')}},{t:'Close'}]],
+promise:['Safety promise','<p>The tutor will not ask for private details, will not pretend to be a person, and will tell a parent or guardian if you may be in danger. It never sends lesson text in an alert.</p>',[{t:'Close',pri:1}]],
+trusted:['Trusted contact','<p class="mut">After 18, safety alerts go to this person instead.</p><label class="fld"><span>Name or email</span><input type="text" id="tc"></label>',[{t:'Save',pri:1,fn:function(){if(!$('#tc').value.trim()){$('[data-err]').textContent='Type a name or email, or choose Cancel.';return false}toast('Trusted contact saved.')}},{t:'Cancel'}]],
+think:['What does the app think about me?','<ul class="rl"><li>Strong in naming alcohols</li><li>Works best in the morning</li><li>Needs a review of acids and bases</li></ul><p class="mut sm">These are guesses. You can correct them.</p>',[{t:'Correct something',fn:function(){toast('Pick a line to correct.')}},{t:'Close',pri:1}]],
+inbox:['Family inbox','<ul class="rl"><li><span class="chip">Today</span> Dustin finished Lesson 6.1.</li><li><span class="chip">Mon</span> A weekly summary is ready.</li></ul>',[{t:'Close',pri:1}]],
+limits:['About your data and its limits','<p>The app guesses from what a learner does. A guess is not a grade, a diagnosis or a final word. A teacher\'s judgment comes first.</p>',[{t:'Close',pri:1}]],
+export:['Save a copy of the records','<p class="mut">Choose a folder. Nothing is deleted.</p><label class="fld"><span>Folder</span><select id="fo"><option>Documents</option><option>Desktop</option><option>An external drive</option></select></label>',[{t:'Save a copy',pri:1,fn:function(){toast('Saved a copy to '+$('#fo').value+'.')}},{t:'Cancel'}]],
+withdraw:['Withdraw agreement and lock the app?','<p>The app locks and the learner cannot use it until a parent or guardian agrees again. Nothing is deleted.</p>',[{t:'Withdraw and lock',danger:1,fn:function(){toast('Agreement withdrawn (prototype: nothing changed).')}},{t:'Cancel',pri:1}]],
+'delete':['Delete records?','<p><b>This cannot be undone.</b> Type DELETE to confirm.</p><label class="fld"><span>Confirmation</span><input type="text" id="dc" autocomplete="off"></label>',[{t:'Delete records',danger:1,fn:function(){if($('#dc').value!=='DELETE'){$('[data-err]').textContent='Type DELETE exactly, or choose Cancel.';return false}toast('Records deleted (prototype: nothing changed).')}},{t:'Cancel',pri:1}]],
+aisent:['What is sent and to whom','<p><b>Sent:</b> your question and the tutor\'s reply.</p><p><b>Not sent:</b> the learner\'s name, birth date, files and grades.</p><p><b>Sent to:</b> the AI company you choose in this pane.</p>',[{t:'Close',pri:1}]],
+aico:['Choose an AI company',null,null],
+acct:['Back up your family\'s records',null,null],
+rk:['Print the key again','<p>Your key: <b>K7QP 2M9X TR4B 8WNA D5HC</b> (sample).</p><p class="mut sm">Old copies stop working once you print a new one.</p>',[{t:'Print',pri:1,fn:function(){toast('Sent to the printer (sample).')}},{t:'Cancel'}]],
+move:['Move to a new Mac','<ol><li>Turn on backup on this Mac.</li><li>Install KelyraAdvance on the new Mac.</li><li>Sign in and enter the recovery key.</li></ol>',[{t:'Turn on backup',pri:1,fn:function(){LS.set('bk',true);render()}},{t:'Close'}]],
+dev:['Devices','<ul class="rl"><li>💻 This MacBook <span class="chip">This Mac</span></li><li>💻 Living room iMac <button class="btn sm" data-so>Sign out</button></li></ul>',[{t:'Close',pri:1}]]
+};
+var pane=(location.hash||'').slice(1)||LS.get('pane','learner');if(!DATA[pane])pane='learner';
+var query='';
+function unlocked(){try{return sessionStorage.getItem('kaPin')==='1'}catch(e){return true}}
+function val(r){var v=LS.get(r[0],r[5]);return v}
+function ctlHtml(r){var id=r[0],t=r[2],v=val(r);
+ if(t==='seg')return '<div class="seg" data-id="'+id+'">'+r[4].map(function(o){var p=o.split('|');return '<button data-v="'+p[1]+'" class="'+(v===p[1]?'on':'')+'" aria-pressed="'+(v===p[1])+'">'+p[0]+'</button>'}).join('')+'</div>';
+ if(t==='toggle')return '<button class="tg" role="switch" aria-label="'+esc(r[1])+'" aria-checked="'+(!!v)+'" data-id="'+id+'"></button><span class="tag">'+(v?'On':'Off')+'</span>';
+ if(t==='range')return '<input type="range" min="'+r[4][0]+'" max="'+r[4][1]+'" value="'+v+'" data-id="'+id+'" aria-label="'+esc(r[1])+'"><span class="tag">'+v+'%</span>';
+ if(t==='select'||t==='style')return '<select data-id="'+id+'" aria-label="'+esc(r[1])+'">'+r[4].map(function(o){return '<option'+(o===v?' selected':'')+'>'+o+'</option>'}).join('')+'</select>';
+ if(t==='locked')return '<span class="lock">🔒 '+r[5]+'</span><button class="btn sm" data-lock="'+id+'">Why is this locked?</button>';
+ if(t==='button'||t==='danger'){var lab=r[4];if(id==='acct'&&LS.get('email',''))lab='Change';return '<button class="btn sm'+(t==='danger'?' danger':'')+'" data-m="'+r[5]+'">'+lab+'</button>'}
+ if(t==='credits')return '<span class="mut sm">Version 1.0</span>';return ''}
+function rowHtml(r,tag){var extra='';
+ if(r[2]==='style')extra='<div class="prev" id="prev"></div>';
+ if(r[2]==='credits')extra='<details class="cred"><summary>Open-source credits</summary><ul class="rl"><li>React</li><li>Tauri</li><li>SQLCipher</li></ul></details>';
+ if(r[0]==='acct'&&LS.get('email',''))extra='<div class="mut sm">Signed in as '+esc(LS.get('email',''))+'</div>';
+ if(r[0]==='aico'&&LS.get('aico',''))extra='<div class="mut sm">Chosen: '+esc(LS.get('aico',''))+'.</div>';
+ return '<div class="srow" data-row="'+r[0]+'"><div class="lbl"><b>'+r[1]+(tag?' <span class="chip">'+tag+'</span>':'')+'</b><span class="note">'+r[3]+'</span>'+extra+'</div><div class="ctl">'+ctlHtml(r)+'</div></div>'}
+function render(){
+ var p=PANES.filter(function(x){return x[0]===pane})[0],out='';
+ $('#ptitle').textContent='Settings: '+p[1];document.title='Settings: '+p[1];
+ $$('.panes button').forEach(function(b){b.classList.toggle('on',b.dataset.p===pane&&!query);b.setAttribute('aria-current',b.dataset.p===pane&&!query?'page':'false')});
+ if(query){var n=0;out='<h2>Search results</h2>';PANES.forEach(function(pp){if(pp[0]==='family'&&!unlocked())return;DATA[pp[0]].forEach(function(g){g[1].forEach(function(r){if((r[1]+' '+r[3]).toLowerCase().indexOf(query)>=0){n++;out+=rowHtml(r,pp[1])}})})});if(!n)out+='<p class="mut">No setting matches. Try a shorter word, such as "text" or "backup".</p>'}
+ else{out='<h2>'+p[1]+'</h2><p class="who">Who can change these: '+p[3]+'.</p>';DATA[pane].forEach(function(g){out+='<div class="gh">'+g[0]+'</div>'+g[1].map(function(r){return rowHtml(r)}).join('')})}
+ $('#wc').innerHTML=out;wire()}
+function setVal(id,v){LS.set(id,v);applyPrefs()}
+function wire(){
+ var find=function(id){var r;PANES.forEach(function(p){DATA[p[0]].forEach(function(g){g[1].forEach(function(x){if(x[0]===id)r=x})})});return r};
+ $$('.seg').forEach(function(s){$$('button',s).forEach(function(b){b.onclick=function(){setVal(s.dataset.id,b.dataset.v);render();toast('Appearance: '+b.textContent)}})});
+ $$('.tg').forEach(function(t){t.onclick=function(){var id=t.dataset.id,on=t.getAttribute('aria-checked')!=='true';
+  if(id==='aion'&&on&&!LS.get('aico','')){toast('Choose an AI company first.');return}
+  if(id==='bk'&&on&&!LS.get('email','')){accountSheet();return}
+  setVal(id,on);if(id==='aion')LS.set('ai',on);render()}});
+ $$('input[type=range]').forEach(function(r){r.oninput=function(){setVal(r.dataset.id,+r.value);r.nextElementSibling.textContent=r.value+'%'}});
+ $$('select[data-id]').forEach(function(s){s.onchange=function(){setVal(s.dataset.id,s.value);if(s.dataset.id==='style')prev();toast('Saved')}});
+ $$('[data-lock]').forEach(function(b){b.onclick=function(){modal('This setting is locked','<p>Only a parent or guardian can change how much the tutor helps on graded work. A teacher\'s rules may also apply.</p>',[{t:'Open Family and privacy',pri:1,fn:function(){pane='family';LS.set('pane',pane);location.hash='family';render();gate()}},{t:'Close'}])}});
+ $$('[data-m]').forEach(function(b){b.onclick=function(){var k=b.dataset.m;if(k==='aico')return aiCoSheet();if(k==='acct')return accountSheet();var m=MODALS[k];var bg=modal(m[0],m[1],m[2]);$$('[data-so]',bg).forEach(function(x){x.onclick=function(){x.closest('li').remove();toast('Signed out.')}})}});
+ prev()}
+function prev(){var s=$('#prev');if(!s)return;var v=LS.get('style','Ages 13 to 18');s.innerHTML='<b>Preview:</b> '+STYLES[v]+'<div class="sm" style="margin-top:6px">Suggested for Dustin (age 15): Ages 13 to 18. Under 13, a parent or guardian picks the style. For ages 13 to 14, a parent or guardian approves a change.</div>'}
+function aiCoSheet(){modal('Choose an AI company','<p class="mut">Your question and the tutor\'s reply go to the company you choose. It keeps them for the time shown.</p><label class="choice"><input type="radio" name="co" value="Sample company"> Sample company · keeps data for 30 days</label><label class="choice"><input type="radio" name="co" value="Sample company, no storage"> Sample company, no storage · keeps nothing</label>',[{t:'Save',pri:1,fn:function(){var c=$('input[name=co]:checked');if(!c){$('[data-err]').textContent='Choose one company, or choose Cancel.';return false}LS.set('aico',c.value);render()}},{t:'Cancel'}])}
+function accountSheet(){modal('Back up your family\'s records','<p>Backup needs an account so we can send you a sign-in link. Your records are encrypted on this Mac before they leave it.</p><label class="fld"><span>Email</span><input type="text" id="em" placeholder="you@example.com"></label>',[{t:'Create an account',pri:1,fn:function(){var e=$('#em').value.trim();if(e.indexOf('@')<1){$('[data-err]').textContent='Type a full email address, such as you@example.com.';return false}LS.set('email',e);LS.set('bk',true);render();toast('Backup is on.')}},{t:'Not now'}])}
+function gate(){if(pane!=='family'||unlocked()||query)return;
+ var bg=modal('Enter your PIN','<p>This area is for a parent or guardian. Enter your personal identification number (PIN).</p><label class="fld"><span>PIN</span><input type="text" id="pin" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="4 digits"></label><p class="mut sm">Prototype: any 4 digits unlock this area.</p>',
+ [{t:'Unlock',pri:1,fn:function(){if(!/^\d{4}$/.test($('#pin').value)){$('[data-err]').textContent='Enter 4 digits.';return false}try{sessionStorage.setItem('kaPin','1')}catch(e){}render();toast('Unlocked')}},{t:'Use Touch ID',fn:function(){toast('Touch ID is not available. Enter your PIN.');return false}},{t:'Cancel',fn:function(){pane='learner';LS.set('pane',pane);location.hash='learner';render()}}]);
+ $('.btn.ghost',bg).onclick=function(){bg.remove();pane='learner';location.hash='learner';render()}}
+function boot(){
+ document.body.innerHTML='<div class="desk"><div class="win" role="dialog" aria-label="Settings"><div class="wtitle"><button class="dot r" id="closew" aria-label="Close Settings"></button><button class="dot y" id="miniw" aria-label="Minimize Settings"></button><button class="dot g" id="zoomw" aria-label="Zoom Settings"></button><h1 id="ptitle">Settings</h1><input type="text" id="ssearch" placeholder="Search settings" aria-label="Search settings"></div><div class="wbody"><nav class="panes" aria-label="Settings panes">'+PANES.map(function(p){return '<button data-p="'+p[0]+'"><span>'+p[2]+'</span><span>'+p[1]+'</span></button>'}).join('')+'<div class="sbsp"></div><div class="mut sm" style="padding:14px 8px">Opens with Command-comma. We remember the last pane you used.</div></nav><div class="wcont" id="wc"></div></div></div></div>';
+ applyPrefs();
+ $('#closew').onclick=function(){location.href='today.html'};
+ $('#miniw').onclick=function(){toast('Minimizes the window in the Mac app.')};
+ $('#zoomw').onclick=function(){$('.win').style.height=$('.win').style.height?'':'calc(100vh - 48px)'};
+ $$('.panes button').forEach(function(b){b.onclick=function(){if(pane===b.dataset.p&&!query){toast('Already showing '+b.lastChild.textContent+'.');return}pane=b.dataset.p;query='';$('#ssearch').value='';LS.set('pane',pane);location.hash=pane;render();gate()}});
+ $('#ssearch').oninput=function(e){query=e.target.value.trim().toLowerCase();render()};
+ render();gate()}
+boot();
+if(location.search.indexOf('sheet=account')>=0)accountSheet();
+</script></body></html>

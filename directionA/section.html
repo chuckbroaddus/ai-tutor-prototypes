@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Section</title><link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="a.css"></head><body><script src="a.js"></script><script>var S={practice:['Practice','practice','Adaptive questions picked for you.'],map:['Knowledge map','map','Everything you know, with what to review.'],school:['School','school','Teacher materials and school work.'],plan:['Study plan','plan','What to study before each test.'],prep:['Test prep','prep','Practice for an upcoming test.'],ready:['Readiness','ready','Evidence for moving up a subject or grade.'],growth:['Growth','growth','How you are doing over time.'],portfolio:['Portfolio','portfolio','Milestones and the work you are proud of.']};
+var k=new URLSearchParams(location.search).get('s')||'practice',d=S[k]||S.practice;
+var tabs=k==='portfolio'?['Milestones','Research archive','Credentials']:k==='map'?['Map','Skill tree']:null;
+var inner='<p class="mut">'+d[2]+'</p><div class="callout"><span>🧩</span><span class="sp">This page is not part of this review. It keeps its current design.</span></div>';
+if(tabs) inner+='<div class="tabs" role="tablist">'+tabs.map(function(t,i){return '<button role="tab" class="'+(i?'':'on')+'">'+t+'</button>'}).join('')+'</div><div id="tabnote" class="card mut">'+tabs[0]+' view.</div>';
+else inner+='<div class="card"><b>Sample card</b><p class="mut">Sample content for '+d[0]+'.</p><button class="btn" id="smp">Open</button></div>';
+shell(k,d[0],inner);
+$$('.tabs button').forEach(function(b){b.onclick=function(){if(b.classList.contains('on')){toast('Already showing '+b.textContent+'.');return}$$('.tabs button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');$('#tabnote').textContent=b.textContent+' view.'}});
+var sm=$('#smp');sm&&(sm.onclick=function(){toast('Opens the existing '+d[0]+' screen.')});
+</script></body></html>

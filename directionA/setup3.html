@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Step 3 of 3: Save your recovery key</title><link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="a.css"></head><body><div class="fr"><div class="frcard"><div class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></div><p class="mut sm" style="margin:0">Step 3 of 3</p><h1>Save your recovery key</h1>
+<p>This key unlocks your family's backup if you lose this Mac. It is shown once. Print it and keep the paper somewhere safe.</p>
+<div class="key" id="key" aria-label="Recovery key">•••• •••• •••• •••• ••••</div><p class="mut sm">This is a sample key for the prototype.</p>
+<div class="row"><button class="btn" id="print">Print the key</button></div>
+<label class="choice" style="margin-top:14px"><input type="checkbox" id="stored"> I stored the printed key</label>
+<div class="err" id="err" role="alert"></div>
+<div class="acts"><button class="btn" id="back">Back</button><button class="btn pri" id="go">Finish setup</button></div></div></div><script src="a.js"></script><script>
+$("#print").onclick=function(){$("#key").textContent="K7QP 2M9X TR4B 8WNA D5HC";modal("Print the key","<p>The print window opens here. Your key is: <b>K7QP 2M9X TR4B 8WNA D5HC</b> (sample).</p>",[{t:"Print",pri:1,fn:function(){toast("Sent to the printer (sample).")}},{t:"Cancel"}])};
+$("#back").onclick=function(){location.href="setup2.html"};
+$("#go").onclick=function(){if(!$("#stored").checked){$("#err").textContent="Tick the box after you store the printed key.";return}
+ LS.set("done",true);location.href="today.html?first=1"};</script></body></html>

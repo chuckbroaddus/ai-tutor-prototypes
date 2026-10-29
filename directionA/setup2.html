@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Step 2 of 3: Who is learning?</title><link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="a.css"></head><body><div class="fr"><div class="frcard"><div class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></div><p class="mut sm" style="margin:0">Step 2 of 3</p><h1>Who is learning?</h1>
+<label class="fld"><span>Your name</span><input type="text" id="pname" autocomplete="off"></label>
+<label class="fld"><span>Learner's nickname</span><input type="text" id="nick" autocomplete="off"></label>
+<div class="row"><label class="fld sp"><span>Birth year</span><select id="by"></select></label><label class="fld sp"><span>Birth month</span><select id="bm"></select></label></div>
+<p class="row" style="margin:6px 0"><span id="region">Region: Texas, United States.</span><button class="btn ghost sm" id="chg">Change</button></p>
+<p class="mut sm">We use the birth date to pick the right style and safety rules. You can change the style later in Settings.</p>
+<div class="err" id="err" role="alert"></div>
+<div class="acts"><button class="btn" id="back">Back</button><button class="btn pri" id="go">Save and continue</button></div></div></div><script src="a.js"></script><script>
+var y=new Date().getFullYear();$("#by").innerHTML="<option value=\"\">Choose</option>"+Array.from({length:30},function(_,i){return "<option>"+(y-4-i)+"</option>"}).join("");
+$("#bm").innerHTML="<option value=\"\">Choose</option>"+["January","February","March","April","May","June","July","August","September","October","November","December"].map(function(m){return "<option>"+m+"</option>"}).join("");
+$("#chg").onclick=function(){modal("Region","<p class=\"mut\">The region sets the age rules that apply for consent.</p><label class=\"fld\"><span>Region</span><select id=\"rg\"><option>Texas, United States</option><option>California, United States</option><option>Ontario, Canada</option><option>England, United Kingdom</option></select></label>",[{t:"Save",pri:1,fn:function(){$("#region").textContent="Region: "+$("#rg").value+"."}},{t:"Cancel"}])};
+$("#back").onclick=function(){location.href="setup1.html"};
+$("#go").onclick=function(){var e="";if(!$("#pname").value.trim())e="Type your name to continue.";else if(!$("#nick").value.trim())e="Type the learner's nickname to continue.";else if(!$("#by").value||!$("#bm").value)e="Choose a birth year and month to continue.";
+ $("#err").textContent=e;if(e)return;LS.set("nick",$("#nick").value.trim());location.href="setup3.html"};</script></body></html>

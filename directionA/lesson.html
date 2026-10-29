@@ -1,0 +1,17 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lesson</title><link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="a.css"></head><body><script src="a.js"></script><script>var started=false,ai=LS.get('ai',false);
+function lesson(){
+ var q='';
+ if(!started) q='<div class="card"><span class="pill a">Alcohols · Lesson 6.2</span><h2>Naming alcohols</h2><p class="mut">You will learn how to name an alcohol from its structure. About 12 minutes. You can stop at any time.</p><ul><li>Find the longest carbon chain that holds the OH group.</li><li>Number the chain from the end nearest the OH group.</li><li>End the name with "-ol".</li></ul><div class="row"><button class="btn pri" id="begin">Start lesson</button><button class="btn ghost" id="outline">See the outline</button></div></div>';
+ else q='<div class="card"><div class="row"><b class="sp">Question 1 of 5</b><span class="pill">Practice</span></div><div class="bar" style="margin:8px 0"><i style="width:20%"></i></div><p>What is the name of CH3CH2CH2OH?</p><div id="opts">'+['Ethanol','Propan-1-ol','Propan-2-ol','Butan-1-ol'].map(function(o){return '<button class="btn opt" data-o="'+o+'">'+o+'</button>'}).join('')+'</div><div class="row"><button class="btn ghost" id="hint">Show a hint</button></div></div>';
+ var chat='<div class="card"><h3>AI tutor</h3>'+(ai?'<div class="chat"><div class="msg ai">Hi! Ask me anything about naming alcohols.</div></div><div class="row" style="margin-top:8px"><input type="text" id="msg" class="sp" placeholder="Type a question"><button class="btn pri" id="send">Send</button></div>':'<p class="mut">Ask questions as you go. A parent or guardian turns this on first.</p><button class="btn" id="askai">Ask the tutor</button>')+'</div>';
+ shell('lesson','Lesson',(started?'':'')+'<div class="lesson"><div>'+q+'</div><div>'+chat+'</div></div>');
+ var b=$('#begin');b&&(b.onclick=function(){started=true;lesson()});
+ var o=$('#outline');o&&(o.onclick=function(){modal('Outline','<ol><li>Find the chain</li><li>Number it</li><li>Add the ending</li><li>Check yourself</li><li>Practice</li></ol>')});
+ $$('#opts .opt').forEach(function(e){e.onclick=function(){var ok=e.dataset.o==='Propan-1-ol';$$('#opts .opt').forEach(function(x){x.classList.remove('right','wrong')});e.classList.add(ok?'right':'wrong');toast(ok?'Right. The OH group is on carbon 1.':'Not quite. Count from the end nearest the OH group.')}});
+ var hh=$('#hint');hh&&(hh.onclick=function(){toast('Hint: the chain has three carbons.')});
+ var a=$('#askai');a&&(a.onclick=function(){aiFirstUse()});
+ var s=$('#send');s&&(s.onclick=function(){var v=$('#msg').value.trim();if(!v){toast('Type a question first.');return}var c=$('.chat');c.appendChild(h('<div class="msg me">'+esc(v)+'</div>'));c.appendChild(h('<div class="msg ai">Good question. Look for the longest chain that holds the OH group. (Sample reply.)</div>'));$('#msg').value=''});
+}
+lesson();
+if(location.search.indexOf('sheet=ai')>=0)aiFirstUse();
+</script></body></html>

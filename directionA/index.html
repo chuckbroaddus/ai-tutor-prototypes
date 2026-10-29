@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Direction A: learn first</title><link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="a.css"></head><body>
+<div class="idx">
+<h1>KelyraAdvance, Direction A: learn first</h1>
+<p class="mut">Clickable prototype. Nothing here is saved anywhere but this browser. It is dark by default and built on the Design 2 look. Start at step 1, or jump to any screen below.</p>
+<div class="row"><a class="btn pri" href="setup1.html">Start at first run, step 1</a><a class="btn" href="today.html">Go to Today</a><a class="btn" href="settings.html">Open Settings</a></div>
+
+<h2 style="margin-top:24px">Choices this prototype assumes</h2>
+<p class="mut">These were open questions in the plan. This prototype uses the plan's suggested answer for each. Change any of them and the screens change.</p>
+<table>
+<tr><th>#</th><th>Open question</th><th>What the prototype does</th></tr>
+<tr><td>1</td><td>Which direction</td><td><b>Confirmed by Chuck:</b> Direction A, learn first.</td></tr>
+<tr><td>2</td><td>When to ask for an account</td><td><b>Assumption:</b> at backup time. First run has no account step. See <a href="settings.html?sheet=account#backup">the backup account sheet</a>.</td></tr>
+<tr><td>3</td><td>Agreement summaries</td><td><b>Assumption:</b> the four summaries are shown open, with a not-pre-selected choice. A lawyer should confirm this still meets the consent rules.</td></tr>
+<tr><td>4</td><td>Recovery key</td><td><b>Assumption:</b> stays in first run (step 3).</td></tr>
+<tr><td>5</td><td>Theme switch</td><td><b>Confirmed by Chuck:</b> no theme buttons on any page. Appearance is one row in <a href="settings.html#learner">Settings, Learner</a>. Dark is the default.</td></tr>
+<tr><td>6</td><td>Name for the adult</td><td><b>Assumption:</b> "parent or guardian" everywhere.</td></tr>
+<tr><td>7</td><td>Sessions with parents and teens</td><td>Not part of the prototype. On hold.</td></tr>
+</table>
+
+<h2 style="margin-top:24px">Screens</h2>
+<table>
+<tr><th>#</th><th>Screen</th><th>What to try</th></tr>
+<tr><td>1</td><td><a href="setup1.html">First run, step 1: Welcome</a></td><td>Four summaries stay open. Pick I agree or I do not agree.</td></tr>
+<tr><td>2</td><td><a href="setup-declined.html">First run: if you do not agree</a></td><td>Go back or close the window.</td></tr>
+<tr><td>3</td><td><a href="setup2.html">First run, step 2: Who is learning?</a></td><td>Fill in the fields. Region is filled in and has Change.</td></tr>
+<tr><td>4</td><td><a href="setup3.html">First run, step 3: Save your recovery key</a></td><td>Print the key, tick the box, finish.</td></tr>
+<tr><td>5</td><td><a href="today.html">Today, with the 10-item side bar</a></td><td>One next step. Customize Today. Learner menu.</td></tr>
+<tr><td>6</td><td><a href="lesson.html">A lesson start</a></td><td>Start the lesson. Try a question.</td></tr>
+<tr><td>7</td><td><a href="lesson.html?sheet=ai">AI tutor first-use sheet</a></td><td>Opens when someone asks the tutor and AI is off.</td></tr>
+<tr><td>8</td><td><a href="settings.html#learner">Settings: Learner</a></td><td>Appearance, text size, interface style with preview.</td></tr>
+<tr><td>9</td><td><a href="settings.html#family">Settings: Family and privacy</a></td><td>Asks for the PIN the first time. Any 4 digits work here.</td></tr>
+<tr><td>10</td><td><a href="settings.html#ai">Settings: AI tutor</a></td><td>Choose a company, then turn the tutor on.</td></tr>
+<tr><td>11</td><td><a href="settings.html#backup">Settings: Backup and devices</a></td><td>Turning on backup asks for an account.</td></tr>
+<tr><td>12</td><td><a href="settings.html#advanced">Settings: Advanced</a></td><td>Subject tools, simplify, security, About.</td></tr>
+<tr><td>13</td><td><a href="settings.html?sheet=account#backup">Backup account sheet</a></td><td>Where the account is asked for.</td></tr>
+</table>
+<p class="mut sm">Other side bar pages (Practice, Knowledge map, School, Study plan, Test prep, Readiness, Growth, Portfolio) are simple stand-ins. They keep their current design and are not part of this review. Open Settings with Command-comma. Search with Command-K.</p>
+<p class="mut sm"><button class="btn sm" id="reset">Start over (clear what this prototype saved)</button></p>
+</div>
+<script src="a.js"></script><script>$('#reset').onclick=function(){Object.keys(localStorage).filter(function(k){return k.indexOf('ka.')===0}).forEach(function(k){localStorage.removeItem(k)});try{sessionStorage.clear()}catch(e){}toast('Cleared. Dark mode is back.')}</script></body></html>
