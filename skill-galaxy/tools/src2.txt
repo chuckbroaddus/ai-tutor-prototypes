@@ -1,0 +1,148 @@
+@num reals "Real & complex numbers"
+A1|Rational and irrational numbers: properties and closure|C:N-RN|<rational
+A1|Rational exponents and radicals|C:N-RN|<expo,rational
+A1|Quantities and units in modeling|C:N-Q|<ratio
+A2|Complex numbers: arithmetic|C:N-CN|<reals
+A2|The complex plane: modulus and conjugates|C:N-CN
+PC|Complex numbers in polar form; De Moivre's theorem|C:N-CN|AP:Precalc U3|<trigf
+@alg linear "Linear equations & systems"
+A1|Solve linear equations and literal equations|C:A-REI|<lin2|=lin1
+A1|Solve linear and compound inequalities|C:A-REI
+A1|Absolute value equations and inequalities|C:A-REI
+A1|Systems of linear equations: elimination and substitution|C:A-REI|<lin1|=sys
+A1|Systems of linear inequalities|C:A-REI
+@alg polys "Polynomials & factoring"
+A1|Add, subtract and multiply polynomials|C:A-APR|<expo,lin1
+A1|Factor out the GCF; factor trinomials|C:A-SSE
+A1|Special products; difference of squares|C:A-SSE
+A2|Polynomial division and the remainder theorem|C:A-APR
+A2|Factor theorem and zeros of polynomials|C:A-APR
+A2|Polynomial identities|C:A-APR
+A2|Fundamental theorem of algebra (statement and use)|C:N-CN
+PC|Rational zeros theorem|AP:Precalc U1
+PC|Partial fraction decomposition|AP:Calc U6
+@alg quad "Quadratic equations"
+A1|Solve quadratics by factoring and square roots|C:A-REI|<polys|=quad1
+A1|Complete the square; the quadratic formula|C:A-REI
+A2|Quadratics with complex solutions|C:N-CN|<reals
+A2|Systems containing a quadratic|C:A-REI
+@alg radrat "Rational & radical equations"
+A2|Simplify rational expressions|C:A-APR|<polys
+A2|Solve rational equations; extraneous solutions|C:A-REI
+A2|Solve radical equations|C:A-REI|<reals
+@fun fn "Functions"
+A1|Function notation, domain and range|C:F-IF|<fn
+A1|Linear functions and slope|C:F-IF|=linf|<fnslope,lin1
+A1|Slope-intercept and point-slope forms|C:F-LE
+A1|Linear models: interpret slope and intercept|C:F-LE
+A1|Arithmetic sequences as linear functions|C:F-BF
+A1|Absolute value and piecewise functions|C:F-IF
+A1|Exponential functions: growth and decay|C:F-LE|<expo
+A1|Quadratic functions: vertex, intercepts, graphs|C:F-IF|<linf,quad1
+A1|Compare linear, quadratic and exponential models|C:F-LE
+A2|Transformations of functions|C:F-BF
+A2|Function composition and inverse functions|C:F-BF
+A2|Polynomial functions: zeros, end behavior, graphs|C:F-IF|<polys
+A2|Rational functions and asymptotes|C:F-IF|<radrat
+A2|Exponential and logarithmic functions|C:F-LE|=log
+A2|Logarithm properties and equations|C:F-LE
+A2|Geometric sequences and series|C:F-BF
+PC|Rates of change and function behavior|AP:Precalc U1
+PC|Unit circle and trigonometric functions|C:F-TF|AP:Precalc U3|=trigf|<trig
+PC|Graph sine and cosine: amplitude, period, phase|C:F-TF|AP:Precalc U3
+PC|Tangent, reciprocal trig functions and graphs|C:F-TF
+PC|Inverse trigonometric functions|C:F-TF
+PC|Trigonometric identities|C:F-TF
+PC|Solve trigonometric equations|C:F-TF
+PC|Sum, difference and double-angle formulas|C:F-TF
+PC|Polar coordinates and polar graphs|AP:Precalc U3
+PC|Parametric equations|AP:Precalc U4
+PC|Sequences and series; sigma notation|C:A-SSE
+PC|Binomial theorem|C:A-APR
+PC|Exponential and logarithmic modeling|AP:Precalc U2
+PC|Regression with function families|AP:Precalc U2
+@geo hsgeo "High school geometry"
+GE|Undefined terms, definitions and constructions|C:G-CO|<shapes
+GE|Rigid motions and congruence|C:G-CO|<transformations
+GE|Triangle congruence criteria: SSS, SAS, ASA|C:G-CO
+GE|Proofs about lines, angles and triangles|C:G-CO|<proofreason
+GE|Proofs about parallelograms|C:G-CO
+GE|Dilations and similarity|C:G-SRT
+GE|Triangle similarity criteria and proofs|C:G-SRT
+GE|Right-triangle trigonometry|C:G-SRT|=trig|<pyth
+GE|Law of sines and law of cosines|C:G-SRT
+GE|Circles: chords, tangents, inscribed angles|C:G-C
+GE|Arc length, sector area and radians|C:G-C
+GE|Equations of circles|C:G-GPE|<quad1
+GE|Coordinate geometry proofs|C:G-GPE
+GE|Volume formulas and Cavalieri's principle|C:G-GMD
+GE|Modeling with geometry|C:G-MG
+PC|Conic sections|C:G-GPE|<quad1
+@lin vec "Vectors & matrices (introductory)"
+A2|Vectors as quantities with magnitude and direction|C:N-VM|<trig
+A2|Matrix operations and applications|C:N-VM
+PC|Vector operations and components|C:N-VM|AP:Precalc U4
+PC|Matrix inverses and determinants|C:N-VM|AP:Precalc U4
+PC|Solve systems with matrices|C:N-VM
+PC|Linear transformations as matrices|C:N-VM
+@sta hsstat "HS statistics & probability"
+A1|Summarize categorical and quantitative data|C:S-ID|<statq
+A1|Scatter plots, regression and correlation|C:S-ID
+A2|Normal distribution and z-scores|C:S-ID
+A2|Conditional probability and independence|C:S-CP|<probsimple
+A2|Rules of probability|C:S-CP
+A2|Random variables and expected value|C:S-MD
+A2|Surveys, experiments and observational studies|C:S-IC
+A2|Margin of error and simulation-based inference|C:S-IC
+AP|Exploring one-variable data|AP:Stats
+AP|Exploring two-variable data|AP:Stats
+AP|Collecting data: sampling and experiments|AP:Stats
+AP|Probability and random variables|AP:Stats
+AP|Sampling distributions and the central limit theorem|AP:Stats
+AP|Confidence intervals for proportions and means|AP:Stats
+AP|Significance tests for proportions and means|AP:Stats
+AP|Inference for slopes and categorical data|AP:Stats
+@dis discrete "Counting & discrete structures"
+A2|Sets, Venn diagrams and set notation|T:Discrete Math|<probsimple
+A2|Counting principle and factorial notation|T:Discrete Math
+PC|Permutations and combinations|T:Discrete Math
+PC|Recursive sequences|T:Discrete Math
+PC|Mathematical induction (introduction)|T:Discrete Math
+PC|Graphs and networks (introduction)|T:Discrete Math
+@app model "Modeling & finance"
+A1|Mathematical modeling cycle|C:Modeling
+A2|Simple and compound interest|T:Mathematical Models with Applications|<log
+A2|Loans, annuities and savings models|T:Mathematical Models with Applications
+@pro hsproof "Reasoning & proof (HS)"
+GE|Deductive reasoning and conditional statements|C:G-CO|=proofreason
+GE|Converse, inverse and contrapositive|C:G-CO
+GE|Indirect proof|C:G-CO
+@cal ap "AP Calculus (AB/BC)"
+AP|Limits: informal, graphical and one-sided|AP:Calc U1|<log,trigf|=limits
+AP|Continuity and the Intermediate Value Theorem|AP:Calc U1
+AP|Limits at infinity and asymptotes|AP:Calc U1
+AP|The derivative as a limit; rate of change at a point|AP:Calc U2
+AP|Derivative rules: power, sum, product, quotient|AP:Calc U2|=deriv
+AP|Derivatives of trigonometric, exponential and logarithmic functions|AP:Calc U2
+AP|The chain rule|AP:Calc U3
+AP|Implicit differentiation|AP:Calc U3
+AP|Derivatives of inverse functions|AP:Calc U3
+AP|Higher-order derivatives|AP:Calc U3
+AP|Related rates|AP:Calc U4
+AP|Linearization and L'Hôpital's rule|AP:Calc U4
+AP|Mean Value Theorem and Extreme Value Theorem|AP:Calc U5
+AP|First and second derivative tests; curve sketching|AP:Calc U5
+AP|Optimization|AP:Calc U5
+AP|Riemann sums and the definite integral|AP:Calc U6
+AP|Fundamental Theorem of Calculus|AP:Calc U6|=ftc
+AP|Antiderivatives and u-substitution|AP:Calc U6
+AP|Integration by parts and partial fractions (BC)|AP:Calc U6
+AP|Improper integrals (BC)|AP:Calc U6
+AP|Slope fields and separable differential equations|AP:Calc U7
+AP|Euler's method and logistic models (BC)|AP:Calc U7
+AP|Area between curves|AP:Calc U8
+AP|Volumes by slicing and shells|AP:Calc U8
+AP|Arc length and accumulation applications (BC)|AP:Calc U8
+AP|Parametric, polar and vector-valued calculus (BC)|AP:Calc U9
+AP|Convergence tests for infinite series (BC)|AP:Calc U10|=series
+AP|Taylor and Maclaurin series (BC)|AP:Calc U10

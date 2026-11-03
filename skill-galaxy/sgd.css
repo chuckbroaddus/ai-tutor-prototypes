@@ -1,0 +1,48 @@
+/* Prototype D (star clusters). Dark first; light is not designed here. */
+svg.sgd{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;user-select:none;outline:none}
+svg.sgd.drag{cursor:grabbing}
+svg.sgd text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;pointer-events:none}
+svg.sgd .hide{display:none}
+svg.sgd [data-kind]{cursor:pointer;outline:none}
+svg.sgd [data-kind]:focus-visible .focusring,svg.sgd [data-kind].sel .focusring{display:block}
+svg.sgd .focusring{display:none;fill:none;stroke:#fff;stroke-width:2.5;stroke-dasharray:5 4;vector-effect:non-scaling-stroke}
+svg.sgd .cl-name{font-weight:700;font-size:calc(19px*var(--ik,1));fill:#e6edf3;text-anchor:middle;paint-order:stroke;stroke:#05070b;stroke-width:calc(5px*var(--ik,1))}
+svg.sgd .cl-sub{font-size:calc(12px*var(--ik,1));fill:#9aa7b4;text-anchor:middle;paint-order:stroke;stroke:#05070b;stroke-width:calc(4px*var(--ik,1))}
+svg.sgd .s-name{font-weight:650;font-size:calc(13.5px*var(--ik,1));fill:#e6edf3;text-anchor:middle;paint-order:stroke;stroke:#05070b;stroke-width:calc(4px*var(--ik,1))}
+svg.sgd .s-sub{font-size:calc(11px*var(--ik,1));fill:#9aa7b4;text-anchor:middle;paint-order:stroke;stroke:#05070b;stroke-width:calc(3.5px*var(--ik,1))}
+svg.sgd .s-name.sm{font-size:calc(11.5px*var(--ik,1));font-weight:600}
+svg.sgd .s-req{font-size:calc(10.5px*var(--ik,1));fill:#c9a65a;text-anchor:middle;paint-order:stroke;stroke:#05070b;stroke-width:calc(3.5px*var(--ik,1))}
+svg.sgd .lbl{transition:opacity .28s}
+svg.sgd .edge{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round}
+svg.sgd .edge.on{stroke:#9fb3d1;stroke-width:2.2px}
+svg.sgd .edge.old{stroke:#6f819c;stroke-width:1.6px}
+svg.sgd .edge.ghost{stroke:#6e7681;stroke-width:1.5px;stroke-dasharray:2 7}
+svg.sgd .moon{fill:#e6edf3;opacity:.5}
+svg.sgd .chip rect{fill:#0d1117;stroke:#3fb950;stroke-opacity:.6;stroke-width:1.2;vector-effect:non-scaling-stroke}
+svg.sgd .chip text{font-size:calc(12px*var(--ik,1));fill:#cfe9d4;font-weight:600;text-anchor:middle}
+/* planets */
+svg.sgd .pl .plabel{font-size:calc(11px*var(--ik,1));font-weight:600;fill:#e6edf3;text-anchor:middle;paint-order:stroke;stroke:#05070b;stroke-width:calc(3.5px*var(--ik,1));opacity:0;transition:opacity .15s}
+svg.sgd .pl.hot .plabel,svg.sgd .pl:hover .plabel,svg.sgd .pl:focus .plabel,svg.sgd .pl.sel .plabel,svg.sgd.lv-detail .pl .plabel{opacity:1}
+svg.sgd .pl .dimwrap{display:block}
+svg.sgd.has-sel .pl:not(.hl):not(.sel){opacity:.28}
+svg.sgd .pedge{fill:none;vector-effect:non-scaling-stroke}
+svg.sgd .ring-r{fill:none;stroke:#ffffff;stroke-opacity:.07;stroke-width:1.2px;vector-effect:non-scaling-stroke}
+/* HUD */
+.sgd-hud{position:absolute;left:12px;top:10px;z-index:4;width:292px;max-height:calc(100% - 90px);overflow:auto;background:#0d1117ee;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:12.5px;transition:opacity .2s}
+.sgd-hud[hidden]{display:none}
+.sgd-hud h2{margin:0 0 2px;font-size:16px}
+.sgd-hud .mut{color:var(--mut)}
+.sgd-hud .bar{margin:6px 0 4px;height:7px}
+.sgd-hud .row2{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}
+.sgd-hud .tag{background:var(--bg3);border:1px solid var(--line);border-radius:99px;padding:1px 8px;font-size:11.5px}
+.sgd-hud .need{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-bottom:1px solid #ffffff10}
+.sgd-hud .need.ok b{color:#3fb950}.sgd-hud .need.no b{color:#d29922}
+.sgd-hud .btn{padding:4px 9px;font-size:12px;margin:6px 6px 0 0}
+.sgd-hud h3{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:10px 0 3px}
+.sg-attr{top:10px}
+.sgd-lg4{margin-top:8px;border-top:1px solid var(--line);padding-top:6px}.sgd-lg4 div{display:flex;align-items:center;gap:8px;margin:3px 0}
+.sg-leg.min .sgd-lg4{display:none}
+.sgd-list-star{margin:6px 0}.sgd-list-star>summary{cursor:pointer;padding:4px 0;color:var(--fg)}.sgd-list-star .mut{font-size:12px}
+.sgd-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+body.rm svg.sgd .lbl,body.rm svg.sgd .pl .plabel{transition:none}
+@media (max-width:900px){.sgd-hud{width:240px}}

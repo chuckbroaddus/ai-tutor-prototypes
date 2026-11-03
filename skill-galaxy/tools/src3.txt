@@ -1,0 +1,129 @@
+@cal multi "Multivariable & vector calculus"
+U1|Vectors in 2-D and 3-D; dot and cross products|CUPM:Calculus|<vec,ftc|=vec3
+U1|Lines, planes and surfaces in space|CUPM:Calculus
+U1|Vector-valued functions and space curves|CUPM:Calculus
+U1|Functions of several variables; partial derivatives|CUPM:Calculus
+U1|Gradient, directional derivatives, tangent planes|CUPM:Calculus
+U1|Multivariable optimization and Lagrange multipliers|CUPM:Calculus
+U1|Double and triple integrals|CUPM:Calculus
+U1|Change of variables: polar, cylindrical, spherical, Jacobian|CUPM:Calculus
+U1|Line integrals and conservative fields|CUPM:Calculus
+U1|Green's, Stokes' and divergence theorems|CUPM:Calculus
+@cal ode "Differential equations"
+U1|First-order ODEs: separable, linear, exact|CUPM:Differential Equations|<ftc
+U1|Second-order linear ODEs|CUPM:Differential Equations
+U1|Laplace transforms|CUPM:Differential Equations
+U1|Systems of ODEs and phase portraits|CUPM:Differential Equations|<eig
+U2|Existence and uniqueness; stability of ODE solutions|CUPM:Differential Equations
+U3|Partial differential equations: heat, wave, Laplace|CUPM:Partial Differential Equations
+U3|Fourier series and boundary-value problems|CUPM:Partial Differential Equations
+@cal real "Real analysis"
+U2|Sequences, completeness and the real numbers|CUPM:Real Analysis|<proof1,ftc|=realseq
+U2|The ε–δ definition of limits and continuity|CUPM:Real Analysis
+U2|Compactness and uniform continuity on R|CUPM:Real Analysis
+U2|Differentiation: rigorous theory and the mean value theorem|CUPM:Real Analysis
+U2|The Riemann integral and the Fundamental Theorem (rigorous)|CUPM:Real Analysis
+U2|Series of numbers: convergence theory|CUPM:Real Analysis
+U2|Sequences and series of functions; uniform convergence|CUPM:Real Analysis
+U2|Metric spaces: open, closed, compact, complete|CUPM:Real Analysis|=metric
+U3|Lebesgue measure and integration (introduction)|CUPM:Real Analysis
+U3|Calculus on manifolds: differential forms (introduction)|CUPM:Real Analysis|<multi
+@cal cx "Complex analysis"
+U3|Holomorphic functions and Cauchy–Riemann equations|CUPM:Complex Analysis|<realseq,reals|=holo
+U3|Contour integrals and Cauchy's theorem|CUPM:Complex Analysis
+U3|Power series, Taylor and Laurent series|CUPM:Complex Analysis
+U3|Residues and evaluation of integrals|CUPM:Complex Analysis
+U3|Conformal maps and the Möbius group|CUPM:Complex Analysis
+@lin la "Linear algebra"
+U1|Gaussian elimination and row reduction|CUPM:Linear Algebra|<vec
+U1|Vector spaces and subspaces|CUPM:Linear Algebra|=vecspace
+U1|Linear independence, basis and dimension|CUPM:Linear Algebra
+U1|Linear transformations and matrix representations|CUPM:Linear Algebra
+U1|Determinants|CUPM:Linear Algebra
+U1|Eigenvalues, eigenvectors and diagonalization|CUPM:Linear Algebra|=eig
+U1|Inner products, orthogonality and Gram–Schmidt|CUPM:Linear Algebra
+U2|Spectral theorem and singular value decomposition|CUPM:Linear Algebra
+U2|Jordan canonical form|CUPM:Linear Algebra
+U2|Quadratic forms and bilinear forms|CUPM:Linear Algebra
+U3|Multilinear algebra and tensors (introduction)|CUPM:Linear Algebra
+@alg abstract "Abstract algebra"
+U2|Groups: definition, subgroups, cyclic groups|CUPM:Abstract Algebra|<proof2,vecspace|=groups
+U2|Permutation groups and the symmetric group|CUPM:Abstract Algebra
+U2|Cosets and Lagrange's theorem|CUPM:Abstract Algebra
+U2|Normal subgroups and quotient groups|CUPM:Abstract Algebra
+U2|Homomorphisms and the isomorphism theorems|CUPM:Abstract Algebra
+U2|Rings, integral domains and fields|CUPM:Abstract Algebra|=rings
+U3|Polynomial rings, ideals and PIDs|CUPM:Abstract Algebra
+U3|Field extensions and finite fields|CUPM:Abstract Algebra
+U3|Group actions and the Sylow theorems (introduction)|CUPM:Abstract Algebra
+U3|Galois theory (introduction)|CUPM:Abstract Algebra
+@ntc nt "Number theory"
+U1|Divisibility, the Euclidean algorithm, primes|CUPM:Number Theory|<factors,proof1
+U1|Fundamental theorem of arithmetic|CUPM:Number Theory
+U1|Modular arithmetic and congruences|CUPM:Number Theory
+U1|Chinese remainder theorem|CUPM:Number Theory
+U2|Euler's theorem, Fermat's little theorem, primitive roots|CUPM:Number Theory
+U2|Quadratic residues and reciprocity|CUPM:Number Theory
+U2|Diophantine equations and continued fractions|CUPM:Number Theory
+U2|Arithmetic functions and Dirichlet series (introduction)|CUPM:Number Theory
+U3|Public-key cryptography: RSA and elliptic curves|CUPM:Number Theory
+U3|Algebraic number theory: number fields (introduction)|CUPM:Number Theory|<rings
+U3|Analytic number theory: prime number theorem (introduction)|CUPM:Number Theory|<holo
+@dis logic "Logic, proof & foundations"
+U1|Propositional logic and truth tables|CUPM:Transitions to Proof|<hsproof|=prop
+U1|Predicates, quantifiers and negation|CUPM:Transitions to Proof
+U1|Sets, relations and functions (formal)|CUPM:Transitions to Proof
+U3|Formal logic: completeness and compactness|CUPM:Mathematical Logic|<prop
+U3|Computability and Turing machines|CUPM:Mathematical Logic
+U3|Axiomatic set theory: ordinals, cardinals, choice|CUPM:Set Theory
+@dis comb "Combinatorics & graph theory"
+U1|Counting: permutations, combinations, binomial identities|CUPM:Discrete Mathematics|<discrete|=combcount
+U1|Recurrence relations|CUPM:Discrete Mathematics
+U1|Graph theory: paths, trees, connectivity|CUPM:Discrete Mathematics
+U1|Algorithms and complexity: big-O analysis|CUPM:Discrete Mathematics
+U2|Pigeonhole principle and inclusion–exclusion|CUPM:Discrete Mathematics
+U2|Generating functions|CUPM:Discrete Mathematics
+U2|Graph theory: matchings, coloring and planarity|CUPM:Discrete Mathematics
+U3|Probabilistic and extremal methods|CUPM:Discrete Mathematics
+U3|Ramsey theory|CUPM:Discrete Mathematics
+U3|Combinatorial designs and coding theory|CUPM:Discrete Mathematics
+@pro proof "Proof & mathematical practice"
+U1|Direct proof and proof by cases|CUPM:Transitions to Proof|<logic|=proof1
+U1|Proof by contradiction and contrapositive|CUPM:Transitions to Proof
+U1|Mathematical induction and well-ordering|CUPM:Transitions to Proof
+U1|Writing mathematics clearly (with LaTeX)|CUPM:Cognitive recommendations
+U2|Proof strategies; cardinality of sets|CUPM:Transitions to Proof|=proof2
+U2|Mathematical communication and presentation|CUPM:Cognitive recommendations
+U3|Independent inquiry: undergraduate research or capstone|CUPM:Cognitive recommendations
+@geo topo "Geometry & topology"
+U1|Axiomatic Euclidean geometry|CUPM:Geometry|<hsgeo,proof1
+U2|Non-Euclidean and projective geometry|CUPM:Geometry
+U2|Differential geometry of curves|CUPM:Geometry|<multi
+U2|Differential geometry of surfaces|CUPM:Geometry
+U2|General topology: open sets, continuity, compactness|CUPM:Topology|<metric
+U2|Connectedness and the separation axioms|CUPM:Topology
+U3|The fundamental group and covering spaces (introduction)|CUPM:Topology|<groups
+U3|Manifolds (introduction)|CUPM:Topology
+@sta probtheory "Probability & mathematical statistics"
+U1|Probability spaces and combinatorial probability|CUPM:Probability and Stochastic Processes|<hsstat,combcount|=probspace
+U1|Discrete and continuous random variables|CUPM:Probability and Stochastic Processes
+U1|Expectation, variance and moment generating functions|CUPM:Probability and Stochastic Processes
+U1|Joint distributions, covariance and conditioning|CUPM:Probability and Stochastic Processes
+U2|Law of large numbers and central limit theorem|CUPM:Probability and Stochastic Processes
+U2|Estimation: method of moments and maximum likelihood|CUPM:Statistics
+U2|Hypothesis testing and confidence regions (theory)|CUPM:Statistics
+U2|Linear models and regression (theory)|CUPM:Statistics|<vecspace
+U3|Markov chains and stochastic processes|CUPM:Probability and Stochastic Processes
+U3|Bayesian inference|CUPM:Statistics
+U3|Design of experiments and time series (introduction)|CUPM:Statistics
+@app numeric "Numerical & applied mathematics"
+U1|Mathematical modeling with data|CUPM:Mathematical Modeling|<model
+U1|Programming for mathematics (Python or Julia)|CUPM:Cognitive recommendations
+U1|Numerical methods: root-finding and interpolation|CUPM:Numerical Analysis|<ftc
+U2|Numerical integration and ODE solvers|CUPM:Numerical Analysis
+U2|Numerical linear algebra|CUPM:Numerical Analysis|<eig
+U2|Linear programming and optimization|CUPM:Mathematical Modeling|<vecspace
+U2|Game theory and operations research|CUPM:Mathematical Modeling
+U3|Convex optimization|CUPM:Mathematical Modeling
+U3|Mathematical physics: Lagrangian and Hamiltonian mechanics|CUPM:Mathematical Modeling|<ode
+U3|Calculus of variations and dynamical systems (introduction)|CUPM:Mathematical Modeling

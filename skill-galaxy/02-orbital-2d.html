@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Skill Galaxy · Prototype B · 2-D orbital map</title>
+<link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="sg.css"></head><body>
+<script src="sg-core.js"></script><script src="sg-ui.js"></script><script src="sg-map2d.js"></script>
+<script>
+var UI=SGUI.build({title:'Skill Galaxy · B · 2-D orbital map',hint:'Scroll to zoom · drag to pan · click a planet · Tab walks the skills'});
+var drawer,map;
+drawer=SG.mountDrawer(UI.draw,{mode:UI.colorMode,onClose:function(){map.deselect();UI.shift(false)},onGo:function(id){map.select(id,{focus:true})}});
+map=createMap2D(UI.stage,{mode:'world',colorMode:'tier',drawerWidth:function(){return UI.draw.classList.contains('open')?350:0},bottomInset:function(){return UI.leg.classList.contains('min')?0:0},
+ onSelect:function(s){drawer.show(s);UI.shift(true)},onDeselect:function(){drawer.hide();UI.shift(false)},
+ onLevel:function(i){var p=[{t:'Galaxy',fn:i.level==='galaxy'?null:function(){map.deselect();map.fit()}}];
+  if(i.subject){var u=SG.sub[i.subject];p.push({t:u.name,fn:i.level==='system'?null:function(){map.focusSubject(u.id)}});if(i.tier!=null)p.push({t:u.tiers[i.tier],fn:i.skill&&i.level==='detail'?function(){map.focusTier(u.id,i.tier)}:null});}
+  if(i.skill&&i.level!=='galaxy'){p.push({t:SG.by[i.skill].name})}
+  UI.setCrumb(p);UI.showAttrs(i.subject);var lv={galaxy:'Level 1 · Galaxy of subjects',system:'Level 2 · Subject system',cluster:'Level 3 · Skill cluster (tier)',detail:'Level 4 · Skill detail'}[i.level];UI.hint.textContent=lv+' · scroll to change level'}});
+UI.presets.innerHTML='<button class="btn" data-j="all">Galaxy</button><button class="btn" data-j="math">Math</button><button class="btn" data-j="chem">Chemistry</button><button class="btn" data-j="phys">Physics ↔</button>';
+UI.presets.onclick=function(e){var j=e.target.dataset&&e.target.dataset.j;if(!j)return;map.deselect();j==='all'?map.fit():map.focusSubject(j)};
+UI.top.querySelector('#cmode').onchange=function(){map.setColorMode(UI.colorMode());if(drawer&&UI.draw.dataset.skill)drawer.show(SG.by[UI.draw.dataset.skill])};
+UI.top.querySelector('#ghost').onchange=function(){map.setGhost(UI.ghost())};
+UI.zoom.querySelector('#zin').onclick=function(){map.zoomBy(1.5)};UI.zoom.querySelector('#zout').onclick=function(){map.zoomBy(1/1.5)};UI.zoom.querySelector('#zfit').onclick=function(){map.deselect();map.fit()};
+var lbtn=UI.top.querySelector('#listbtn');lbtn.onclick=function(){var o=UI.list.classList.toggle('open');lbtn.setAttribute('aria-pressed',o);lbtn.textContent=o?'🗺 Map view':'☰ List view';if(o)SG.outline(UI.list,{mode:UI.colorMode,onGo:function(id){UI.list.classList.remove('open');lbtn.setAttribute('aria-pressed',false);lbtn.textContent='☰ List view';map.select(id,{focus:true})}})};
+var q=new URLSearchParams(location.search);
+if(q.get('subject'))map.focusSubject(q.get('subject'));
+if(q.get('skill'))map.select(q.get('skill'),{focus:true});
+if(q.get('ghost'))UI.top.querySelector('#ghost').click();
+if(q.get('colors')){UI.top.querySelector('#cmode').value=q.get('colors');UI.top.querySelector('#cmode').onchange()}
+if(q.get('list'))lbtn.click();
+window.__map=map;
+</script></body></html>

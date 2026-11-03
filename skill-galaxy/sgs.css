@@ -1,0 +1,43 @@
+html,:root{color-scheme:dark}
+canvas,svg{color-scheme:dark}
+/* Prototype E (solar systems). Dark first. */
+svg.sgs{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:3;pointer-events:none;outline:none;overflow:hidden}
+svg.sgs text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;pointer-events:none}
+svg.sgs [data-kind]{outline:none}
+svg.sgs [data-kind][data-hit="1"]{cursor:pointer}
+svg.sgs .hit{fill:transparent;pointer-events:none}
+svg.sgs .fr{fill:none;stroke:#fff;stroke-width:2;stroke-dasharray:5 4;display:none}
+svg.sgs [data-kind]:focus-visible .fr,svg.sgs [data-kind].sel .fr,svg.sgs [data-kind].hov .fr{display:block}
+svg.sgs .rg{fill:none;stroke-linecap:round}
+svg.sgs .trk{stroke:#fff;stroke-opacity:.14}
+svg.sgs .lb1{font-weight:650;fill:#e6edf3;text-anchor:middle;paint-order:stroke;stroke:#05070b;stroke-width:4px;stroke-linejoin:round}
+svg.sgs .lb2{font-weight:400;fill:#9aa7b4;text-anchor:middle;paint-order:stroke;stroke:#05070b;stroke-width:3.5px;stroke-linejoin:round}
+svg.sgs .k-star .lb1{font-size:15px;font-weight:700}
+svg.sgs .k-star .lb2{font-size:11.5px}
+svg.sgs .k-planet .lb1{font-size:12.5px}svg.sgs .k-planet .lb2{font-size:10.5px}
+svg.sgs .k-moon .lb1{font-size:10.5px;font-weight:600}svg.sgs .k-moon .lb2{font-size:10px}
+svg.sgs .k-ast .lb1{font-size:10px;font-weight:600}
+svg.sgs .feed{fill:none;stroke-linecap:round}
+.sgs-hud{position:absolute;left:12px;top:12px;width:262px;z-index:6;background:#0d1117ee;border:1px solid var(--line);border-radius:12px;padding:11px 13px;font-size:13px}
+.sgs-hud[hidden]{display:none}
+.sgs-hud h2{margin:0 0 2px;font-size:17px}
+.sgs-hud .sub{color:var(--mut);font-size:12px;margin-bottom:6px}
+.sgs-hud .kv{display:flex;justify-content:space-between;gap:8px;margin:3px 0}
+.sgs-hud .kv b{font-weight:600}
+.sgs-hud .bars{margin:7px 0 2px}
+.sgs-hud .br{display:flex;align-items:center;gap:7px;margin:3px 0;font-size:12px}
+.sgs-hud .br span:first-child{width:104px;color:var(--mut)}
+.sgs-hud .br .bar{flex:1;height:6px;border-radius:4px;background:#ffffff14;overflow:hidden}.sgs-hud .br .bar i{display:block;height:100%}
+.sgs-hud .live{margin-top:7px;padding-top:7px;border-top:1px solid var(--line);font-size:12px;color:#c9d1d9}
+.sgs-hud .live i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#58a6ff;margin-right:5px;box-shadow:0 0 0 3px #58a6ff33}
+.sgs-hud button.btn{margin-top:8px}
+.sgs-lg{display:grid;gap:6px;font-size:12px;margin-top:6px}.sgs-lg>div{display:flex;gap:9px;align-items:center}.sgs-lg svg{flex:none}
+.sgs-planets{display:flex;gap:8px;margin:5px 0}.sgs-planets span{display:block;width:26px;height:26px;border-radius:50%}
+.sgs-live{position:absolute;left:-9999px}
+.sg-top{row-gap:6px}
+.sg-leg.min .sgs-lg{display:none}
+.sgs-tip{position:absolute;left:0;top:0;z-index:9;pointer-events:none;background:#0d1117f5;border:1px solid var(--line);border-radius:8px;padding:5px 9px;font-size:12px;white-space:nowrap;color:#e6edf3;box-shadow:0 4px 14px #0008}
+.sgs-tip[hidden]{display:none}.sgs-tip span{color:#9aa7b4;margin-left:4px}
+.sgs-hrs{margin:6px 0 2px;font-size:12.5px;color:#c9d1d9}.sgs-hrs span{display:block}
+.sgs-src{margin-top:6px;font-size:11.5px;color:#9aa7b4}.sgs-src summary{cursor:pointer;color:#c9d1d9}.sgs-src .sub{margin-top:4px;line-height:1.4}.sgs-src a{color:#58a6ff}
+.sg-leg.min .sgs-src{display:none}

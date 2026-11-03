@@ -1,0 +1,175 @@
+# DSL: @domain strand "Strand name"  then lines  BAND|Skill name|refs|opts   (opts: =id  <prereq,ids  ^ = no default prereq)
+# Default prerequisite = previous skill in the same strand. refs: C:<CCSS domain> AP:<unit> CUPM:<course report> Q:<qualifying syllabus area> MSC:<2-digit class>. TEKS section is added automatically from the band.
+@num count "Counting & cardinality"
+K|Count to 100 by ones and tens|C:K.CC
+K|Count forward from any number|C:K.CC
+K|Read and write numerals to 20|C:K.CC
+K|Count objects and say how many|C:K.CC
+K|Compare groups and numerals to 10|C:K.CC
+1|Count to 120; skip-count by 2s, 5s, 10s|C:1.NBT
+2|Skip-count by 3s and 4s; even and odd numbers|C:2.OA
+@num place "Place value"
+1|Tens and ones: two-digit numbers|C:1.NBT|<count
+1|Compare two-digit numbers|C:1.NBT
+2|Hundreds, tens, ones: three-digit numbers|C:2.NBT
+2|Read, write, compare numbers to 1,000|C:2.NBT
+3|Round to the nearest 10 and 100|C:3.NBT
+4|Place value to 1,000,000; compare|C:4.NBT
+4|Round multi-digit whole numbers|C:4.NBT
+5|Powers of 10 and place-value patterns|C:5.NBT
+5|Read, write, compare decimals to thousandths|C:5.NBT|=decplace
+@num addsub "Addition & subtraction"
+K|Add and subtract within 5 with objects|C:K.OA|<count
+K|Compose and decompose numbers to 10|C:K.OA
+1|Add and subtract within 20|C:1.OA
+1|Word problems within 20|C:1.OA
+1|Fact families and the equal sign|C:1.OA
+2|Fluently add and subtract within 20|C:2.OA|=addfacts
+2|Add and subtract within 100|C:2.NBT|<place
+2|Add and subtract within 1,000|C:2.NBT
+3|Fluently add and subtract within 1,000|C:3.NBT
+4|Add and subtract multi-digit numbers (standard algorithm)|C:4.NBT
+@num multdiv "Multiplication & division"
+2|Equal groups and arrays|C:2.OA|<addfacts
+3|Multiplication as equal groups; division as sharing|C:3.OA
+3|Multiplication facts to 100 (fluent recall)|C:3.OA|=timestables
+3|Division facts as the inverse of multiplication|C:3.OA
+3|Properties of multiplication|C:3.OA
+3|Multiply one-digit numbers by multiples of 10|C:3.NBT
+4|Multiply multi-digit by one-digit numbers|C:4.NBT
+4|Multiply two two-digit numbers|C:4.NBT
+4|Divide with remainders (four-digit by one-digit)|C:4.NBT
+4|Multi-step word problems, four operations|C:4.OA
+5|Multiply multi-digit whole numbers fluently|C:5.NBT
+5|Divide up to four-digit by two-digit numbers|C:5.NBT
+@num factors "Factors, multiples & primes"
+4|Factors, multiples, prime and composite to 100|C:4.OA|<timestables
+6|Greatest common factor and least common multiple|C:6.NS
+@num fractions "Fractions"
+1|Halves and fourths of shapes|C:1.G|<place
+3|Unit fractions and fractions on a number line|C:3.NF|<multdiv|=frac
+3|Equivalent fractions; compare fractions|C:3.NF
+4|Equivalent fractions with visual models|C:4.NF
+4|Compare fractions with unlike denominators|C:4.NF
+4|Add and subtract fractions, like denominators|C:4.NF
+4|Mixed numbers and decomposing fractions|C:4.NF
+4|Multiply a fraction by a whole number|C:4.NF
+5|Add and subtract fractions, unlike denominators|C:5.NF
+5|Fractions as division (a/b = a ÷ b)|C:5.NF
+5|Multiply fractions and mixed numbers|C:5.NF
+5|Fraction multiplication as scaling|C:5.NF
+5|Divide unit fractions and whole numbers|C:5.NF
+6|Divide fractions by fractions|C:6.NS
+@num decimals "Decimals & percent"
+4|Decimal notation for tenths and hundredths|C:4.NF|<frac
+4|Compare decimals to hundredths|C:4.NF
+5|Add and subtract decimals|C:5.NBT|<decplace
+5|Multiply and divide decimals|C:5.NBT
+6|Fluently compute with multi-digit decimals|C:6.NS
+6|Percent as a rate per 100|C:6.RP|<frac
+7|Percent problems: tax, tip, discount, interest|C:7.RP
+@num ratio "Ratios & proportional reasoning"
+6|Ratios and ratio language|C:6.RP|<multdiv,frac
+6|Unit rates and rate language|C:6.RP
+6|Ratio and rate reasoning (tables, double number lines)|C:6.RP|=ratio
+7|Proportional relationships and constant of proportionality|C:7.RP
+7|Scale drawings and maps|C:7.G
+7|Multi-step proportional problems|C:7.RP
+@num rational "Integers & rational numbers"
+6|Negative numbers, opposites, absolute value|C:6.NS|<place
+6|Rational numbers on the number line and coordinate plane|C:6.NS
+7|Add and subtract integers and rational numbers|C:7.NS
+7|Multiply and divide integers and rational numbers|C:7.NS
+7|Fractions as terminating or repeating decimals|C:7.NS|<decimals
+8|Rational and irrational numbers|C:8.NS
+8|Square roots and cube roots|C:8.EE
+8|Scientific notation|C:8.EE|<place
+@alg patterns "Patterns & early algebraic thinking"
+K|Sort, classify and extend patterns|C:K.MD
+1|Find the unknown in addition and subtraction equations|C:1.OA|<addsub
+3|Patterns in addition and multiplication tables|C:3.OA|<timestables
+4|Number and shape patterns that follow a rule|C:4.OA
+5|Generate two patterns; graph ordered pairs|C:5.OA|<coordplane
+@alg exprs "Expressions & equations (grades 5–8)"
+5|Numerical expressions and order of operations|C:5.OA|=expr
+6|Variables and algebraic expressions|C:6.EE
+6|Whole-number exponents|C:6.EE|<multdiv
+6|Equivalent expressions and properties of operations|C:6.EE
+6|One-step equations and inequalities|C:6.EE
+7|Simplify and expand linear expressions|C:7.EE
+7|Two-step equations and inequalities|C:7.EE|=lin2
+8|Equations with variables on both sides|C:8.EE
+8|Properties of integer exponents|C:8.EE|=expo|<exprs
+8|Systems of linear equations (graphing, substitution)|C:8.EE|<fnslope
+@fun fn "Functions"
+8|Functions: inputs, outputs, and representations|C:8.F|<lin2
+8|Slope, rate of change, and linear relationships|C:8.EE|=fnslope|<ratio
+8|Compare functions in tables, graphs, equations|C:8.F
+8|Model relationships with functions|C:8.F
+@geo shapes "Shapes & spatial reasoning"
+K|Name and sort 2-D and 3-D shapes|C:K.G
+K|Describe positions: above, below, beside|C:K.G
+1|Compose 2-D and 3-D shapes|C:1.G
+2|Recognize and draw shapes by attributes|C:2.G
+2|Partition rectangles into rows and columns|C:2.G
+3|Classify quadrilaterals by attributes|C:3.G
+4|Lines, rays, angles, parallel and perpendicular|C:4.G|=lines
+4|Symmetry and classifying 2-D figures|C:4.G
+5|Classify 2-D figures in a hierarchy|C:5.G
+@geo measure "Measurement"
+K|Compare length and weight|C:K.MD
+1|Measure length with non-standard units|C:1.MD
+1|Tell time to the hour and half-hour|C:1.MD
+2|Measure with rulers; compare lengths|C:2.MD|<addsub
+2|Tell time to five minutes; coins and money|C:2.MD
+3|Time intervals, liquid volume and mass|C:3.MD
+3|Area as tiling; area of rectangles|C:3.MD|<multdiv
+3|Perimeter and polygons|C:3.MD
+4|Convert units within a system|C:4.MD|<multdiv
+4|Angles and the protractor|C:4.MD|<lines
+4|Area and perimeter formulas|C:4.MD
+5|Volume of rectangular prisms|C:5.MD
+5|Coordinate plane: graph points in quadrant I|C:5.G|=coordplane|<decplace
+6|Area of triangles and polygons|C:6.G
+6|Surface area with nets|C:6.G
+6|Volume of prisms with fractional edges|C:6.G|<fractions
+6|Polygons on the coordinate plane|C:6.G|<coordplane
+7|Circumference and area of circles|C:7.G
+7|Angle relationships: vertical, supplementary, complementary|C:7.G
+7|Area, surface area and volume of composite figures|C:7.G
+7|Cross sections of 3-D figures|C:7.G
+8|Transformations: translations, reflections, rotations, dilations|C:8.G|<coordplane|=transformations
+8|Congruence and similarity through transformations|C:8.G
+8|Angle sums; parallel lines and transversals|C:8.G
+8|Pythagorean theorem and its converse|C:8.G|<rational|=pyth
+8|Distance in the coordinate plane|C:8.G
+8|Volume of cylinders, cones and spheres|C:8.G
+@sta data "Data & statistics (grades K–8)"
+K|Classify objects and count by category|C:K.MD
+1|Organize data in up to three categories|C:1.MD
+2|Picture graphs, bar graphs and line plots|C:2.MD
+3|Scaled picture and bar graphs|C:3.MD
+4|Line plots with fractions|C:4.MD|<fractions
+5|Line plots and operations with fractions|C:5.MD
+6|Statistical questions and distributions|C:6.SP|=statq
+6|Mean, median and mode|C:6.SP
+6|Variability: range, IQR, mean absolute deviation|C:6.SP
+6|Dot plots, histograms and box plots|C:6.SP
+7|Random sampling and inference about a population|C:7.SP
+7|Compare two populations using center and spread|C:7.SP
+8|Scatter plots and lines of fit|C:8.SP|<fnslope
+8|Two-way tables and association|C:8.SP
+@sta prob "Probability (grades 7–8)"
+7|Probability of simple events|C:7.SP|<ratio|=probsimple
+7|Probability models and long-run frequency|C:7.SP
+7|Compound events: lists, tables, tree diagrams|C:7.SP
+7|Simulation to estimate probabilities|C:7.SP
+@pro practice "Mathematical practices (K–8)"
+K|Explain how you solved a problem|T:process standards
+2|Use pictures or objects to solve a problem|T:process standards
+3|Use a problem-solving model: understand, plan, solve, check|T:process standards
+4|Represent problems with tables, graphs and equations|T:process standards
+5|Justify an answer with examples and counterexamples|T:process standards
+6|Estimate and check that an answer is reasonable|T:process standards
+7|Use precise mathematical language|T:process standards
+8|Make and test a conjecture|T:process standards

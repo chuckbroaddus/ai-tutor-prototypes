@@ -1,0 +1,62 @@
+# Research frontier: one star per MSC2020 top-level class (excluding 00 general, 01 history). strand id rf, domain by area.
+R|Mathematical logic and foundations|MSC:03|@dis|<logic
+R|Combinatorics|MSC:05|@dis|<comb
+R|Order, lattices, ordered algebraic structures|MSC:06|@alg|<abstract
+R|General algebraic systems|MSC:08|@alg|<abstract
+R|Number theory|MSC:11|@ntc|<nt
+R|Field theory and polynomials|MSC:12|@alg|<abstract
+R|Commutative algebra|MSC:13|@alg|<abstract
+R|Algebraic geometry|MSC:14|@geo|<topo
+R|Linear and multilinear algebra; matrix theory|MSC:15|@lin|<la
+R|Associative rings and algebras|MSC:16|@alg|<abstract
+R|Nonassociative rings and algebras|MSC:17|@alg|<abstract
+R|Category theory; homological algebra|MSC:18|@alg|<abstract
+R|K-theory|MSC:19|@alg|<abstract
+R|Group theory and generalizations|MSC:20|@alg|<abstract
+R|Topological groups, Lie groups|MSC:22|@alg|<abstract
+R|Real functions|MSC:26|@cal|<real
+R|Measure and integration|MSC:28|@cal|<real
+R|Functions of a complex variable|MSC:30|@cal|<cx
+R|Potential theory|MSC:31|@cal|<cx
+R|Several complex variables and analytic spaces|MSC:32|@cal|<cx
+R|Special functions|MSC:33|@cal|<cx
+R|Ordinary differential equations|MSC:34|@cal|<ode
+R|Partial differential equations|MSC:35|@cal|<real
+R|Dynamical systems and ergodic theory|MSC:37|@cal|<real
+R|Difference and functional equations|MSC:39|@cal|<ode
+R|Sequences, series, summability|MSC:40|@cal|<real
+R|Approximations and expansions|MSC:41|@cal|<real
+R|Harmonic analysis on Euclidean spaces|MSC:42|@cal|<real
+R|Abstract harmonic analysis|MSC:43|@cal|<real
+R|Integral transforms, operational calculus|MSC:44|@cal|<real
+R|Integral equations|MSC:45|@cal|<real
+R|Functional analysis|MSC:46|@cal|<real
+R|Operator theory|MSC:47|@cal|<real
+R|Calculus of variations and optimal control|MSC:49|@app|<numeric
+R|Geometry|MSC:51|@geo|<topo
+R|Convex and discrete geometry|MSC:52|@geo|<topo
+R|Differential geometry|MSC:53|@geo|<topo
+R|General topology|MSC:54|@geo|<topo
+R|Algebraic topology|MSC:55|@geo|<topo
+R|Manifolds and cell complexes|MSC:57|@geo|<topo
+R|Global analysis, analysis on manifolds|MSC:58|@geo|<topo
+R|Probability theory and stochastic processes|MSC:60|@sta|<probtheory
+R|Statistics|MSC:62|@sta|<probtheory
+R|Numerical analysis|MSC:65|@app|<numeric
+R|Computer science|MSC:68|@dis|<comb
+R|Mechanics of particles and systems|MSC:70|@app|<numeric
+R|Mechanics of deformable solids|MSC:74|@app|<numeric
+R|Fluid mechanics|MSC:76|@app|<numeric
+R|Optics, electromagnetic theory|MSC:78|@app|<numeric
+R|Classical thermodynamics, heat transfer|MSC:80|@app|<numeric
+R|Quantum theory|MSC:81|@app|<numeric
+R|Statistical mechanics, structure of matter|MSC:82|@app|<numeric
+R|Relativity and gravitational theory|MSC:83|@app|<numeric
+R|Astronomy and astrophysics|MSC:85|@app|<numeric
+R|Geophysics|MSC:86|@app|<numeric
+R|Operations research, mathematical programming|MSC:90|@app|<numeric
+R|Game theory, economics, social and behavioral sciences|MSC:91|@app|<numeric
+R|Biology and other natural sciences|MSC:92|@app|<numeric
+R|Systems theory; control|MSC:93|@app|<numeric
+R|Information and communication, circuits|MSC:94|@app|<numeric
+R|Mathematics education research|MSC:97|@pro|<practice

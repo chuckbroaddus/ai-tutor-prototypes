@@ -1,0 +1,292 @@
+{
+ "schemaVersion": 1,
+ "id": "spanish",
+ "name": "Spanish",
+ "frameworks": [
+  {
+   "name": "ACTFL Proficiency Guidelines",
+   "version": "2024",
+   "url": "https://www.actfl.org/news/revised-actfl-proficiency-guidelines-released"
+  },
+  {
+   "name": "ACTFL World-Readiness Standards (modes of communication, Cultures)",
+   "url": "https://www.actfl.org/educator-resources/world-readiness-standards-for-learning-languages"
+  },
+  {
+   "name": "TEKS Languages Other Than English (19 TAC Chapter 114)",
+   "url": "https://tea.texas.gov/laws-and-rules/texas-administrative-code/19-tac-chapter-114"
+  }
+ ],
+ "levelModel": {
+  "kind": "proficiency-scale",
+  "zones": [
+   {
+    "id": "novice-mid",
+    "name": "Novice Mid"
+   },
+   {
+    "id": "novice-high",
+    "name": "Novice High"
+   },
+   {
+    "id": "intermediate-low",
+    "name": "Intermediate Low"
+   },
+   {
+    "id": "intermediate-mid",
+    "name": "Intermediate Mid"
+   },
+   {
+    "id": "intermediate-high",
+    "name": "Intermediate High"
+   }
+  ],
+  "zoneGates": [
+   {
+    "zone": "intermediate-low",
+    "minShareSolidOfPreviousZone": 0.7
+   },
+   {
+    "zone": "intermediate-mid",
+    "minShareSolidOfPreviousZone": 0.7
+   }
+  ]
+ },
+ "domains": [
+  {
+   "id": "interpretive",
+   "name": "Interpretive (listening, reading)"
+  },
+  {
+   "id": "interpersonal",
+   "name": "Interpersonal (conversation)"
+  },
+  {
+   "id": "presentational",
+   "name": "Presentational (speaking, writing)"
+  },
+  {
+   "id": "language-system",
+   "name": "Vocabulary and grammar"
+  },
+  {
+   "id": "cultures",
+   "name": "Cultures"
+  }
+ ],
+ "skills": [
+  {
+   "id": "s_greet",
+   "name": "Greetings & introductions",
+   "domain": "interpersonal",
+   "zone": "novice-mid",
+   "kind": "can-do",
+   "prereqs": []
+  },
+  {
+   "id": "s_vocab",
+   "name": "Core vocabulary: family, school, food",
+   "domain": "language-system",
+   "zone": "novice-mid",
+   "kind": "concept",
+   "prereqs": []
+  },
+  {
+   "id": "s_listen",
+   "name": "Understand slow, simple speech",
+   "domain": "interpretive",
+   "zone": "novice-mid",
+   "kind": "can-do",
+   "prereqs": []
+  },
+  {
+   "id": "s_pres",
+   "name": "Present tense, regular & common irregular",
+   "domain": "language-system",
+   "zone": "novice-high",
+   "kind": "concept",
+   "prereqs": [
+    {
+     "skill": "s_vocab",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_ser",
+   "name": "Ser vs. estar",
+   "domain": "language-system",
+   "zone": "novice-high",
+   "kind": "concept",
+   "prereqs": [
+    {
+     "skill": "s_pres",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_read",
+   "name": "Read short, familiar texts",
+   "domain": "interpretive",
+   "zone": "novice-high",
+   "kind": "can-do",
+   "prereqs": [
+    {
+     "skill": "s_vocab",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_ask",
+   "name": "Ask & answer simple questions",
+   "domain": "interpersonal",
+   "zone": "novice-high",
+   "kind": "can-do",
+   "prereqs": [
+    {
+     "skill": "s_greet",
+     "strength": "hard"
+    },
+    {
+     "skill": "s_listen",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_write",
+   "name": "Write simple sentences & notes",
+   "domain": "presentational",
+   "zone": "novice-high",
+   "kind": "can-do",
+   "prereqs": [
+    {
+     "skill": "s_pres",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_culture",
+   "name": "Cultural products & practices",
+   "domain": "cultures",
+   "zone": "intermediate-low",
+   "kind": "concept",
+   "prereqs": [
+    {
+     "skill": "s_read",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_past",
+   "name": "Past tense: preterite",
+   "domain": "language-system",
+   "zone": "intermediate-low",
+   "kind": "concept",
+   "prereqs": [
+    {
+     "skill": "s_pres",
+     "strength": "hard"
+    },
+    {
+     "skill": "s_ser",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_conv",
+   "name": "Everyday conversation",
+   "domain": "interpersonal",
+   "zone": "intermediate-low",
+   "kind": "can-do",
+   "prereqs": [
+    {
+     "skill": "s_ask",
+     "strength": "hard"
+    },
+    {
+     "skill": "s_pres",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_descr",
+   "name": "Describe people, places, routines",
+   "domain": "presentational",
+   "zone": "intermediate-low",
+   "kind": "can-do",
+   "prereqs": [
+    {
+     "skill": "s_write",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_imperf",
+   "name": "Imperfect vs. preterite",
+   "domain": "language-system",
+   "zone": "intermediate-mid",
+   "kind": "concept",
+   "prereqs": [
+    {
+     "skill": "s_past",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_narr",
+   "name": "Narrate a past event",
+   "domain": "presentational",
+   "zone": "intermediate-mid",
+   "kind": "can-do",
+   "prereqs": [
+    {
+     "skill": "s_past",
+     "strength": "hard"
+    },
+    {
+     "skill": "s_write",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_news",
+   "name": "Read & discuss short articles",
+   "domain": "interpretive",
+   "zone": "intermediate-mid",
+   "kind": "can-do",
+   "prereqs": [
+    {
+     "skill": "s_read",
+     "strength": "hard"
+    }
+   ]
+  },
+  {
+   "id": "s_connect",
+   "name": "Connected discourse: opinions & reasons",
+   "domain": "interpersonal",
+   "zone": "intermediate-high",
+   "kind": "can-do",
+   "prereqs": [
+    {
+     "skill": "s_conv",
+     "strength": "hard"
+    },
+    {
+     "skill": "s_narr",
+     "strength": "hard"
+    }
+   ]
+  }
+ ]
+}

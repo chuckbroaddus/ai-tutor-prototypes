@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "kelyra://schemas/subject-map/1",
+  "title": "KelyraAdvance subject map (v1, proposal)",
+  "description": "What a subject plugin supplies so the Skill Galaxy can draw it. No learner data lives here; mastery comes from the learner model.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "levelModel",
+    "domains",
+    "skills"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "hue": {
+      "type": "string",
+      "description": "Optional system color; platform may override for contrast."
+    },
+    "frameworks": {
+      "type": "array",
+      "description": "Standards this map is aligned to.",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "url"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "levelModel": {
+      "type": "object",
+      "required": [
+        "kind",
+        "zones"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "course-sequence",
+            "proficiency-scale",
+            "era-sequence",
+            "depth-of-reasoning",
+            "strand-progression"
+          ],
+          "description": "Tells the UI how to word the orbit zones and whether zone gates are expected."
+        },
+        "zones": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "description": "Ordered inner to outer. Each becomes one orbit ring.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "short": {
+                "type": "string"
+              },
+              "standardRef": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "zoneGates": {
+          "type": "array",
+          "description": "Optional. Opens a zone when enough of the previous zone is Solid, instead of (or as well as) per-skill prerequisites.",
+          "items": {
+            "type": "object",
+            "required": [
+              "zone",
+              "minShareSolidOfPreviousZone"
+            ],
+            "properties": {
+              "zone": {
+                "type": "string"
+              },
+              "minShareSolidOfPreviousZone": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "bands": {
+          "type": "array",
+          "description": "Optional. Fine ordered bands inside the zones (inner to outer), each a thin orbit ring. Zones stay the 2-8 coarse orbit zones.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "zone"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "zone": {
+                "type": "string"
+              },
+              "typicalAge": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Domain stars: angular sectors of the system. Used as a layout hint and for labels at the cluster zoom level.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "standardRef": {
+            "type": "string"
+          },
+          "hue": {
+            "type": "string"
+          },
+          "short": {
+            "type": "string",
+            "description": "Optional short label for crowded rims."
+          },
+          "strands": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "name"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "domain",
+          "zone"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 72,
+            "description": "Full name shown in the panel and list. Map labels truncate it automatically."
+          },
+          "summary": {
+            "type": "string",
+            "description": "One plain sentence shown in the detail panel and read by screen readers."
+          },
+          "domain": {
+            "type": "string"
+          },
+          "zone": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "concept",
+              "procedure",
+              "can-do",
+              "practice",
+              "inquiry-skill"
+            ]
+          },
+          "standardRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "prereqs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "skill"
+              ],
+              "properties": {
+                "skill": {
+                  "type": "string",
+                  "description": "Local id, or 'subject:id' for another subject. Cross-subject prereqs are proposals; the platform registry accepts them."
+                },
+                "strength": {
+                  "enum": [
+                    "hard",
+                    "soft"
+                  ],
+                  "default": "hard",
+                  "description": "hard gates unlock (KM-017: must be Solid, 0.55). soft only draws a thin dotted link and never locks."
+                },
+                "rationale": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "masteryGates": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "transfer-item",
+                "varied-contexts",
+                "low-hint-use"
+              ]
+            },
+            "description": "Extra conditions for Mastered (LM-014)."
+          },
+          "decayHalfLifeDays": {
+            "type": "number",
+            "description": "Hint for the forgetting curve R(t); platform default applies if omitted."
+          },
+          "band": {
+            "type": "string",
+            "description": "Optional. Id of a levelModel band: a fine orbit ring inside the skill's zone (e.g. a grade or course). Needed for dense maps (> ~150 skills)."
+          },
+          "strand": {
+            "type": "string",
+            "description": "Optional. Id of one of the domain's strands: a thematic spoke inside the domain sector."
+          },
+          "sourceTags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Which standards families justify the skill (e.g. TEKS, CCSS, AP, CUPM, QUAL, MSC, SYNTHESIS). SYNTHESIS means authored, not taken from a standard."
+          },
+          "masteryTraits": {
+            "type": "object",
+            "description": "Optional hints for mastery layers.",
+            "properties": {
+              "fluencyMatters": {
+                "type": "boolean",
+                "description": "Speed/automaticity is part of mastering this skill (facts, procedures). If absent, the Do-it-fast layer is not shown."
+              }
+            }
+          }
+        }
+      }
+    },
+    "attributes": {
+      "type": "array",
+      "description": "SK-001 attributes, each a weighted view over skills or domains. Rise only with verified mastery.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "from"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "from": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "skill"
+              ],
+              "properties": {
+                "skill": {
+                  "type": "string"
+                },
+                "weight": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "layoutHints": {
+      "type": "object",
+      "properties": {
+        "domainOrder": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pin": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "angleDeg": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "description": " Dense maps (> denseThreshold skills) use domain sectors by angle and bands by radius, fog for far-future skills, and lazy prerequisite edges."
+    }
+  }
+}

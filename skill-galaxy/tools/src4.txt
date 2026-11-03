@@ -1,0 +1,78 @@
+@cal real "Real analysis"
+G1|Measure theory: σ-algebras, Lebesgue and abstract measures|Q:Harvard Real Analysis|MSC:28|<metric|=measure
+G1|Convergence theorems and Fubini–Tonelli|Q:Harvard Real Analysis|MSC:28
+G1|Lp spaces and duality|Q:Harvard Real Analysis|MSC:46
+G1|Differentiation of measures; Radon–Nikodym theorem|Q:Harvard Real Analysis|MSC:28
+G1|Hilbert spaces and orthonormal bases|Q:Harvard Real Analysis|MSC:46
+G1|Fourier transform and convolution|Q:Harvard Real Analysis|MSC:42
+G1|Riesz representation theorem and Borel measures|Q:Harvard Real Analysis|MSC:28
+G2|Banach spaces: Hahn–Banach, open mapping, uniform boundedness|MSC:46|=banach
+G2|Operator theory: compact operators and the spectral theorem|MSC:47
+G2|Distributions and Sobolev spaces|MSC:46
+G2|Partial differential equations: elliptic, parabolic, hyperbolic theory|MSC:35
+G2|Harmonic analysis on Euclidean spaces|MSC:42
+G2|Dynamical systems and ergodic theory|MSC:37
+@cal cx "Complex analysis"
+G1|Complex analysis: Riemann mapping theorem and normal families|Q:Harvard Complex Analysis|MSC:30
+G1|Entire functions: Weierstrass products, Hadamard, Picard|Q:Harvard Complex Analysis|MSC:30
+G1|Harmonic functions and the Dirichlet problem|Q:Harvard Complex Analysis|MSC:31
+G1|Analytic continuation and Riemann surfaces (introduction)|Q:Harvard Complex Analysis|MSC:30
+G2|Several complex variables|MSC:32
+@alg abstract "Abstract algebra"
+G1|Group theory: Sylow, nilpotent and solvable groups, free groups|Q:Harvard Algebra|MSC:20
+G1|Rings and modules: PIDs, UFDs, structure theorem|Q:Harvard Algebra|MSC:16
+G1|Tensor products, exterior algebra and Jordan form|Q:Harvard Algebra|MSC:15
+G1|Field theory: splitting fields and separable extensions|Q:Harvard Algebra|MSC:12
+G1|Galois theory: the fundamental theorem|Q:Harvard Algebra|MSC:12
+G1|Representations of finite groups and characters|Q:Harvard Algebra|MSC:20
+G1|Lie groups and Lie algebras (basics)|Q:Harvard Algebra|MSC:22
+G2|Commutative algebra: localization and Noetherian rings|MSC:13
+G2|Homological algebra and derived functors|MSC:18
+G2|Category theory|MSC:18
+G2|Representation theory of Lie algebras and algebraic groups|MSC:17
+G2|Algebraic K-theory (introduction)|MSC:19
+@geo topo "Geometry & topology"
+G1|Algebraic topology: fundamental group and covering spaces|Q:Harvard Algebraic Topology|MSC:55|<groups ^
+G1|Singular homology and CW complexes|Q:Harvard Algebraic Topology|MSC:55
+G1|Cohomology, cup product and Poincaré duality|Q:Harvard Algebraic Topology|MSC:55
+G1|Smooth manifolds, tangent bundles and vector fields|Q:Harvard Differential Geometry|MSC:57|<multi
+G1|Differential forms, de Rham cohomology and Stokes' theorem|Q:Harvard Differential Geometry|MSC:58
+G1|Vector bundles and connections|Q:Harvard Differential Geometry|MSC:53
+G1|Riemannian metrics, geodesics and curvature|Q:Harvard Differential Geometry|MSC:53
+G1|Algebraic geometry: varieties and the Nullstellensatz|Q:Harvard Algebraic Geometry|MSC:14|<rings ^
+G1|Algebraic curves: genus and Riemann–Roch|Q:Harvard Algebraic Geometry|MSC:14
+G2|Schemes and sheaf cohomology|MSC:14
+G2|Homotopy theory: higher homotopy groups and spectral sequences|MSC:55
+G2|Differential topology: transversality and Morse theory|MSC:57
+G2|Low-dimensional topology: knots and 3-manifolds|MSC:57
+G2|Symplectic and contact geometry|MSC:53
+@sta probtheory "Probability & mathematical statistics"
+G1|Measure-theoretic probability: independence and Borel–Cantelli|MSC:60|<measure,probspace
+G1|Characteristic functions and the central limit theorem|MSC:60
+G1|Conditional expectation and martingales|MSC:60
+G2|Brownian motion and stochastic calculus|MSC:60
+G2|Asymptotic statistics and decision theory|MSC:62
+G2|High-dimensional statistics and learning theory|MSC:62
+G2|Random matrices and random graphs|MSC:60
+@ntc nt "Number theory"
+G1|Algebraic number theory: Dedekind domains, class groups, units|MSC:11|<rings,groups ^
+G2|Analytic number theory: zeta functions and primes in progressions|MSC:11|<holo
+G2|Elliptic curves and modular forms|MSC:11
+G2|Arithmetic geometry and Diophantine equations|MSC:14
+@dis logic "Logic, proof & foundations"
+G1|Mathematical logic: first-order logic, Gödel's theorems|MSC:03|<prop
+G2|Model theory|MSC:03
+G2|Set theory: forcing and large cardinals|MSC:03
+G2|Computational complexity theory|MSC:68
+@dis comb "Combinatorics & graph theory"
+G2|Extremal and probabilistic combinatorics|MSC:05|<probspace
+G2|Algebraic and enumerative combinatorics|MSC:05
+@app numeric "Numerical & applied mathematics"
+G1|Numerical analysis: approximation theory and error analysis|MSC:65
+G1|Optimization theory: convex analysis and duality|MSC:90
+G2|Numerical PDE and finite elements|MSC:65
+G2|Quantum mechanics: mathematical foundations|MSC:81
+G2|General relativity: mathematical foundations|MSC:83
+@pro practice "Mathematical practices"
+G1|Read and critique research papers|CUPM:Cognitive recommendations|<proof
+G2|Write and present original mathematical results|CUPM:Cognitive recommendations

@@ -1,0 +1,101 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Skill Galaxy · Prototype C · Hybrid (3-D galaxy → flat 2-D systems)</title>
+<link rel="stylesheet" href="../shared/common.css"><link rel="stylesheet" href="sg.css">
+<style>#sys2d{position:absolute;inset:0;z-index:2;display:none;background:radial-gradient(ellipse at 50% 45%,#121a28 0%,#0a0e15 62%,#06080c 100%);opacity:0;transition:opacity .3s}#sys2d.on{display:block}#sys2d.show{opacity:1}
+.sg-enter{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:6;background:#0d1117dd;border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:12.5px;color:var(--mut)}</style>
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/":"./vendor/"}}</script></head><body>
+<script>window.SG_MATH_FULL=true</script><script src="data/math-skills.js"></script><script src="data/math-learner.js"></script><script src="sg-core.js"></script><script src="sg-dense.js"></script><script src="sg-ui.js"></script><script src="sg-orbit.js"></script><script src="sg-map2d.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/OrbitControls.js';
+const UI=SGUI.build({title:'Skill Galaxy · C · hybrid',hint:'Galaxy: gentle tilt + zoom only · click a system to enter its flat orbital map'});
+const stage=UI.stage;let colorMode='tier',inSystem=null,map=null;
+const U3=window.SG_MATH_FULL?1/14:1/9;
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setClearColor(0x070a10,1);
+const cv=renderer.domElement;cv.className='three';cv.tabIndex=0;cv.setAttribute('role','application');cv.setAttribute('aria-label','Galaxy of subjects. Drag to tilt a little, scroll to zoom. Use the subject buttons in the toolbar to enter a system.');stage.insertBefore(cv,stage.firstChild);
+const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(40,1,1,3000);
+const ctl=new OrbitControls(camera,cv);ctl.enableDamping=!SG.reduced();ctl.enablePan=false;ctl.minPolarAngle=.18;ctl.maxPolarAngle=.78;ctl.minAzimuthAngle=-.45;ctl.maxAzimuthAngle=.45;ctl.minDistance=170;ctl.maxDistance=560;ctl.rotateSpeed=.5;
+scene.add(new THREE.AmbientLight(0xffffff,1.6));
+{const n=1400,p=new Float32Array(n*3);for(let i=0;i<n;i++){const r=600+Math.random()*700,a=Math.random()*6.283,b=Math.acos(2*Math.random()-1);p[i*3]=r*Math.sin(b)*Math.cos(a);p[i*3+1]=r*Math.cos(b);p[i*3+2]=r*Math.sin(b)*Math.sin(a)}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(p,3));scene.add(new THREE.Points(g,new THREE.PointsMaterial({color:0x9fb0c8,size:1.4,sizeAttenuation:false,transparent:true,opacity:.5})))}
+function tex(fn){const c=document.createElement('canvas');c.width=c.height=128;fn(c.getContext('2d'));return new THREE.CanvasTexture(c)}
+const GLOW=tex(x=>{const g=x.createRadialGradient(64,64,0,64,64,64);g.addColorStop(0,'rgba(255,255,255,1)');g.addColorStop(.25,'rgba(255,255,255,.55)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,128,128)});
+const DOT=tex(x=>{x.fillStyle='#fff';x.beginPath();x.arc(64,64,52,0,7);x.fill()});
+const sys={},labelLayer=document.createElement('div');labelLayer.style.cssText='position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:3';stage.insertBefore(labelLayer,stage.children[1]);
+const hits=[];
+SG.SUBJ.forEach(u=>{
+ const g=new THREE.Group();g.position.set(u.cx*U3,0,u.cy*U3);scene.add(g);const col=new THREE.Color(u.color),started=u.started,lp=SG.layout(u);
+ g.add(new THREE.Mesh(new THREE.SphereGeometry(3.4,28,20),new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:started?1:.4})));
+ const gl=new THREE.Sprite(new THREE.SpriteMaterial({map:GLOW,color:col,transparent:true,opacity:started?.9:.3,depthWrite:false,blending:THREE.AdditiveBlending}));gl.scale.set(24,24,1);g.add(gl);
+ for(let t=0;t<=u.tierMax;t++){const R=SG.ringR(t,u)*U3,pts=[];for(let i=0;i<=128;i++){const a=i/128*6.2832;pts.push(new THREE.Vector3(R*Math.cos(a),0,R*Math.sin(a)))}g.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:0x8b98a8,transparent:true,opacity:u.dense?.08:.14})))}
+ const vis=u.skills.filter(s=>!s.fog),pos=[],cols=[];vis.forEach(s=>{const p=lp[s.id];pos.push(p.x*U3,0,p.y*U3);const c=new THREE.Color(SG.colorFor(s,colorMode));cols.push(c.r,c.g,c.b)});
+ if(u.dense){const seg=[],sp=[],sc=[];u.hints.domainOrder.forEach(d=>{const D=u._D[d],R0=SG.ringR(0,u)*.55*U3,R1=SG.outerR(u)*U3;seg.push(R0*Math.cos(D.a0),0,R0*Math.sin(D.a0),R1*Math.cos(D.a0),0,R1*Math.sin(D.a0));const c=new THREE.Color(D.hue),rs=u._starR*U3;sp.push(rs*Math.cos(D.mid),0,rs*Math.sin(D.mid));sc.push(c.r,c.g,c.b)});
+  g.add(new THREE.LineSegments(new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(seg,3)),new THREE.LineBasicMaterial({color:0x8b98a8,transparent:true,opacity:.12})));
+  const dg=new THREE.BufferGeometry();dg.setAttribute('position',new THREE.Float32BufferAttribute(sp,3));dg.setAttribute('color',new THREE.Float32BufferAttribute(sc,3));g.add(new THREE.Points(dg,new THREE.PointsMaterial({size:11,sizeAttenuation:false,vertexColors:true,map:DOT,alphaTest:.4,transparent:true})))}
+ const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));pg.setAttribute('color',new THREE.Float32BufferAttribute(cols,3));
+ const pts=new THREE.Points(pg,new THREE.PointsMaterial({size:7,sizeAttenuation:false,vertexColors:true,map:DOT,alphaTest:.4,transparent:true}));g.add(pts);
+ const hit=new THREE.Mesh(new THREE.CircleGeometry(SG.outerR(u)*U3,32),new THREE.MeshBasicMaterial({visible:false,side:THREE.DoubleSide}));hit.rotation.x=-Math.PI/2;hit.userData.id=u.id;g.add(hit);hits.push(hit);
+ const l=document.createElement('div');l.className='sg-lbl sun';l.innerHTML='<b>'+u.name+'</b><small>'+(started?(u.count.solid+u.count.mastered)+' of '+u.skills.length+' solid':'Not started')+' · '+u.count.available+' ready</small>';labelLayer.appendChild(l);l.style.pointerEvents='auto';l.style.cursor='pointer';l.onclick=()=>enter(u.id);
+ sys[u.id]={u,g,pts,vis,lbl:l,ring:null};
+});
+scene.updateMatrixWorld(true);
+const bridges=[],tA=new THREE.Vector3(),tB=new THREE.Vector3(),tM=new THREE.Vector3();
+const skillPos=(id,out)=>{const k=SG.by[id],g=sys[k.subj].g,l=SG.sub[k.subj]._lp[id],th=SG.orbit?SG.orbitAngle(k):0,r=Math.hypot(l.x,l.y),a=Math.atan2(l.y,l.x)+th;return out.set(g.position.x+r*Math.cos(a)*U3,0,g.position.z+r*Math.sin(a)*U3)};
+function bridgeCurve(e){skillPos(e.from,tA);skillPos(e.to,tB);tM.copy(tA).add(tB).multiplyScalar(.5);tM.y+=tA.distanceTo(tB)*.22;return new THREE.QuadraticBezierCurve3(tA.clone(),tM.clone(),tB.clone())}
+SG.edges.filter(e=>e.cross).forEach(e=>{const cur=bridgeCurve(e),dash=e.state!=='solid';
+ const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(cur.getPoints(48)),dash?new THREE.LineDashedMaterial({color:0xc4b5fd,dashSize:1.4,gapSize:1,transparent:true,opacity:.95}):new THREE.LineBasicMaterial({color:0xc4b5fd,transparent:true,opacity:.95}));if(dash)line.computeLineDistances();line.frustumCulled=false;scene.add(line);
+ const l=document.createElement('div');l.className='sg-lbl';l.style.color='#c4b5fd';l.textContent='↔ '+SG.by[e.from].name+' → '+SG.by[e.to].name;labelLayer.appendChild(l);
+ const b={e,line,dash,pos:cur.getPoint(.5),lbl:l};bridges.push(b);sys['_b'+e.to]=b});
+// slow idle orbit (shared clock in sg-orbit.js): planets rotate about their suns by a per-tier angle; arcs follow
+function orbitUpdate(){Object.values(sys).forEach(s=>{if(!s.u)return;const at=s.pts.geometry.attributes.position,lp=s.u._lp;s.vis.forEach((k,i)=>{const p=lp[k.id],r=Math.hypot(p.x,p.y),a=Math.atan2(p.y,p.x)+SG.orbitAngle(k);at.setXYZ(i,r*Math.cos(a)*U3,0,r*Math.sin(a)*U3)});at.needsUpdate=true});
+ bridges.forEach(b=>{const cur=bridgeCurve(b.e),at=b.line.geometry.attributes.position;cur.getPoints(48).forEach((p,i)=>at.setXYZ(i,p.x,p.y,p.z));at.needsUpdate=true;if(b.dash)b.line.computeLineDistances();b.pos=cur.getPoint(.5)})}
+Object.values(sys).forEach(s=>{if(s.pts)s.pts.frustumCulled=false});
+if(SG.orbit){SG.orbit.mountControl(UI.top.querySelector('label.tg'));SG.orbit.on(orbitUpdate);SG.orbit.blockers.push(()=>tw!==null||UI.draw.classList.contains('open')||UI.list.classList.contains('open')||(map&&!!map.selected()))}
+// camera
+let tw=null;const reduced=()=>SG.reduced()||document.body.classList.contains('rm');
+function tweenTo(pos,tgt,ms){if(reduced()){camera.position.copy(pos);ctl.target.copy(tgt);ctl.update();return}const p0=camera.position.clone(),t0=ctl.target.clone(),st=performance.now();tw={f:now=>{const u=Math.min(1,(now-st)/ms),e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;camera.position.lerpVectors(p0,pos,e);ctl.target.lerpVectors(t0,tgt,e);if(u>=1)tw=null}}}
+function home(){tweenTo(new THREE.Vector3(-10,400,300),new THREE.Vector3(-10,0,12),700)}
+camera.position.set(-10,400,300);ctl.target.set(-10,0,12);ctl.update();
+// enter / leave system
+const holder=document.createElement('div');holder.id='sys2d';stage.insertBefore(holder,UI.attr);
+const drawer=SG.mountDrawer(UI.draw,{mode:()=>colorMode,onClose:()=>{map&&map.deselect();UI.shift(false)},onGo:id=>{const s=SG.by[id];if(s.subj!==inSystem)enter(s.subj,id);else map.select(id,{focus:true})}});
+function setCrumb(i){const u=inSystem&&SG.sub[inSystem],p=[{t:'Galaxy',fn:inSystem?leave:null}];if(u){p.push({t:u.name,fn:i&&i.level!=='system'?()=>{map.deselect();map.fit()}:null});if(i&&i.domain&&i.level!=='system'){const dd=u._D&&u._D[i.domain];if(dd)p.push({t:dd.name,fn:null})}if(i&&i.tier!=null&&i.level!=='system')p.push({t:u.tiers[i.tier],fn:null});if(i&&i.skill&&i.level!=='system')p.push({t:SG.by[i.skill].name})}UI.setCrumb(p)}
+let chips=null;
+function mountChips(u){unmountChips();if(!u.dense)return;chips=document.createElement('div');chips.className='sg-doms';chips.setAttribute('role','group');chips.setAttribute('aria-label','Jump to a domain star or orbit zone');
+ chips.innerHTML='<button class="btn" data-all>Whole system</button>'+u.hints.domainOrder.map(d=>'<button class="btn" data-d="'+d+'" title="'+u._D[d].name+'"><i style="background:'+u._D[d].hue+'"></i>'+u._D[d].short+'</button>').join('')+
+  '<span class="zn">'+u.zones.map(z=>'<button class="btn" data-z="'+z.id+'" title="'+z.name+'">'+z.name.split(':')[0]+'</button>').join('')+'</span><label class="tg" style="margin-left:8px"><input type="checkbox" id="reveal"> Reveal all (lift the fog)</label>';
+ stage.appendChild(chips);chips.onclick=e=>{const b=e.target.closest('button');if(!b||!map)return;map.deselect();if(b.dataset.all!==undefined)map.fit();else if(b.dataset.d)map.focusDomain(b.dataset.d,u.id);else if(b.dataset.z)map.focusZone(b.dataset.z,u.id)};
+ chips.querySelector('#reveal').onchange=e=>map&&map.setReveal(e.target.checked)}
+function unmountChips(){if(chips){chips.remove();chips=null}}
+function enter(id,skill){
+ if(map){map.destroy();map=null}mountChips(SG.sub[id]);inSystem=id;holder.classList.add('on');requestAnimationFrame(()=>holder.classList.add('show'));cv.style.visibility='hidden';labelLayer.style.display='none';
+ UI.hint.textContent='Flat 2-D system · scroll to zoom · drag to pan · Tab walks the skills';UI.showAttrs(id);
+ map=createMap2D(holder,{mode:'system',subject:id,colorMode,drawerWidth:()=>UI.draw.classList.contains('open')?350:0,
+  onSelect:s=>{drawer.show(s);UI.shift(true)},onDeselect:()=>{drawer.hide();UI.shift(false)},onLevel:i=>{setCrumb(i);UI.hint.textContent={system:'Level 2 · Subject system',cluster:'Level 3 · Skill cluster',detail:'Level 4 · Skill detail',galaxy:'Level 1'}[i.level]+' · scroll to change level'},
+  onPortal:(subj,sid)=>enter(subj,sid),topInset:()=>chips?chips.offsetHeight+10:0});
+ map.setGhost(UI.ghost());setCrumb(null);if(skill)setTimeout(()=>map.select(skill,{focus:true}),60)}
+function leave(){unmountChips();if(map){map.destroy();map=null}inSystem=null;drawer.hide();UI.shift(false);holder.classList.remove('show','on');cv.style.visibility='';labelLayer.style.display='';UI.showAttrs(null);UI.hint.textContent='Galaxy: gentle tilt + zoom only · click a system to enter its flat orbital map';setCrumb(null);home()}
+// picking in galaxy
+const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();let down=null;
+function pick(e){const r=cv.getBoundingClientRect();mouse.set((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(mouse,camera);const h=ray.intersectObjects(hits,false);return h.length?h[0].object.userData.id:null}
+cv.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);cv.addEventListener('pointerup',e=>{if(!down)return;const mv=Math.abs(e.clientX-down[0])+Math.abs(e.clientY-down[1])>5;down=null;if(!mv){const id=pick(e);if(id)enter(id)}});
+cv.addEventListener('pointermove',e=>{if(e.buttons)return;cv.style.cursor=pick(e)?'pointer':'grab'});
+// UI
+UI.presets.innerHTML='<button class="btn" data-j="all">Galaxy</button>'+SG.SUBJ.map(u=>'<button class="btn" data-j="'+u.id+'">'+u.name+'</button>').join('');
+UI.presets.onclick=e=>{const j=e.target.dataset&&e.target.dataset.j;if(!j)return;j==='all'?leave():enter(j)};
+UI.top.querySelector('#cmode').onchange=()=>{colorMode=UI.colorMode();Object.values(sys).forEach(s=>{if(!s.u)return;const a=s.pts.geometry.attributes.color;s.vis.forEach((k,i)=>{const c=new THREE.Color(SG.colorFor(k,colorMode));a.setXYZ(i,c.r,c.g,c.b)});a.needsUpdate=true});if(map)map.setColorMode(colorMode);const sk=UI.draw.dataset.skill;if(sk)drawer.show(SG.by[sk])};
+UI.top.querySelector('#ghost').onchange=()=>map&&map.setGhost(UI.ghost());
+UI.zoom.querySelector('#zin').onclick=()=>map?map.zoomBy(1.5):zoomG(.75);UI.zoom.querySelector('#zout').onclick=()=>map?map.zoomBy(1/1.5):zoomG(1/.75);UI.zoom.querySelector('#zfit').onclick=()=>map?(map.deselect(),map.fit()):home();
+function zoomG(f){const c=ctl.target.clone(),d=camera.position.clone().sub(c).multiplyScalar(f);tweenTo(c.clone().add(d),c,300)}
+const lbtn=UI.top.querySelector('#listbtn');lbtn.onclick=()=>{const o=UI.list.classList.toggle('open');lbtn.setAttribute('aria-pressed',o);lbtn.textContent=o?'🗺 Map view':'☰ List view';if(o)SG.outline(UI.list,{mode:()=>colorMode,onGo:id=>{UI.list.classList.remove('open');lbtn.textContent='☰ List view';const s=SG.by[id];enter(s.subj,id)}})};
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+new ResizeObserver(resize).observe(stage);resize();
+const v=new THREE.Vector3(),tmp=new THREE.Vector3();
+function project(p){v.copy(p).project(camera);return v.z<1?{x:(v.x*.5+.5)*stage.clientWidth,y:(-v.y*.5+.5)*stage.clientHeight}:null}
+function frame(now){requestAnimationFrame(frame);if(inSystem)return;if(tw)tw.f(now);ctl.update();renderer.render(scene,camera);
+ Object.values(sys).forEach(s=>{if(!s.u){const q=project(s.pos);s.lbl.style.display=q?'block':'none';if(q){s.lbl.style.left=q.x+'px';s.lbl.style.top=q.y+'px'}return}
+  const q=project(s.g.getWorldPosition(tmp).clone().add(new THREE.Vector3(0,0,SG.outerR(s.u)*U3+4)));s.lbl.style.display=q?'block':'none';if(q){s.lbl.style.left=q.x+'px';s.lbl.style.top=q.y+'px'}})}
+requestAnimationFrame(frame);
+setCrumb(null);UI.hint.textContent='Galaxy: gentle tilt + zoom only · click a system to enter its flat orbital map';
+const q=new URLSearchParams(location.search);window.__sg={enter,leave,sys,bridges,getMap:()=>map};
+setTimeout(()=>{if(q.get('subject'))enter(q.get('subject'),q.get('skill'));if(q.get('ghost'))UI.top.querySelector('#ghost').click()},200);
+</script></body></html>
